@@ -1,2 +1,2 @@
 # dice-forge
-Dice Forge in Angular
+Dice Forge App in Angular

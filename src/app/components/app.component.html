@@ -1,0 +1,25 @@
+<div class="container-fluid">
+    <h1>Dice Forge</h1>
+
+    <div *ngIf="game; else elseBlock">
+        <h2 *ngIf="this.game.hasStarted && !this.game.isOver">Round {{this.game.currentRound}}</h2>
+        <h2 *ngIf="this.game.isOver">The game is over.</h2>
+        <div class="row">
+            <div class="col-md-4" *ngFor="let hero of game.heroes">
+               <hero-detail [hero]="hero"></hero-detail>
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-12">
+                <sanctuary-detail [sanctuary]="this.game.sanctuary"></sanctuary-detail>
+            </div>
+        </div>
+
+        <button *ngIf="!this.game.hasStarted" (click)="startGame()">Start game</button>
+        <button *ngIf="this.game.hasStarted && !this.game.isOver" (click)="playHeroTurn()">Play {{this.game.heroes[this.game.currentHeroIndex].name}}'s turn</button>
+        <button *ngIf="this.game.hasStarted" (click)="endGame()">End game</button>
+    </div>
+    <ng-template #elseBlock>
+        <button (click)="newGame()">New game</button>
+    </ng-template>
+</div>

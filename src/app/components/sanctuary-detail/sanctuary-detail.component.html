@@ -1,0 +1,13 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Sanctuary</h4>
+        <div class="row">
+            <div class="col-md-1 mt-2" *ngFor="let pool of sanctuary.pools">
+                <div [ngClass]="{'card-text': true, 'disabled': budget != null && budget < pool.dieFaceCost}" >
+                    <div><img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'" /> {{pool.dieFaceCost}}</div>
+                    <die-face-detail *ngFor="let dieFace of pool.dieFaces" [dieFace]="dieFace"></die-face-detail>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

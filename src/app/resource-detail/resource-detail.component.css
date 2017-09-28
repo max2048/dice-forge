@@ -1,0 +1,18 @@
+.resource {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    border: 1px solid black;
+}
+
+.gold-nugget {
+    background-color: #fac42e;
+}
+
+.sun-shard {
+    background-color: #6a70ab;
+}
+
+.moon-shard {
+    background-color: #fa2c17;
+}

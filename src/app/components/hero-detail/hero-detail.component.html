@@ -1,0 +1,15 @@
+<div class="card">
+    <div class="card-body">
+        <h4 class="card-title">{{hero.name}} <img class="glory-point" [src]="imageFolder + 'resources/glory-point.png'" />{{hero.inventory.gloryPoints}}</h4>
+        <div class="card-text">
+            Resources :
+            <resources-detail [inventory]="hero.inventory"></resources-detail>
+            <br/>
+            Light die :
+            <die-detail [die]="hero.inventory.lightDie"></die-detail>
+            <br/>
+            Dark die :
+            <die-detail [die]="hero.inventory.darkDie"></die-detail>
+        </div>
+    </div>
+</div>

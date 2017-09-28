@@ -1,0 +1,8 @@
+.die-face-container {
+    display: inline-block;
+    border: 2px solid white;
+}
+
+.lastly-rolled {
+    border-color: black;
+}
