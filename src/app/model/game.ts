@@ -1,5 +1,6 @@
 import {Hero} from "./hero";
 import {Sanctuary} from "./sanctuary";
+import {Islands} from "./islands";
 
 export class Game {
 
@@ -11,6 +12,7 @@ export class Game {
     isOver = false;
     currentRound: number = null;
     currentHeroIndex: number = null;
+    islands: Islands;
 
     constructor() {
         console.log("*** A NEW GAME BEGINS ***\n");
@@ -48,6 +50,9 @@ export class Game {
         this.hasStarted = true;
         this.currentRound = 1; // 1-based
         this.currentHeroIndex = 0; // 0-based
+
+        this.islands = new Islands(this.heroes.length);
+        console.log(this.islands);
     };
 
     public playHeroTurn = () : void => {

@@ -1,4 +1,4 @@
-export enum HeroFeatTypeEffect {
+export enum HeroicFeatTypeEffect {
     INSTANT, // lightning
     REINFORCEMENT, // gears
     PERMANENT // hourglass
