@@ -4,92 +4,66 @@ import {Islands} from "./islands";
 
 export class Game {
 
-    static readonly ROUNDS: number = 10;
+    readonly ROUNDS: number;
+    readonly CARDS_PER_STACK: number;
+    readonly DIE_FACES_PER_POOL: number;
 
-    heroes: Hero[] = [];
-    sanctuary: Sanctuary = new Sanctuary();
-    hasStarted = false;
-    isOver = false;
-    currentRound: number = null;
-    currentHeroIndex: number = null;
+    currentRound: number;
+    heroes: Hero[];
+    activeHeroIndex: number;
+    sanctuary: Sanctuary;
     islands: Islands;
 
-    constructor() {
-        console.log("*** A NEW GAME BEGINS ***\n");
+    constructor(readonly heroNames: string[]) {
+        this.heroes = [];
+        for (let heroName of heroNames) {
+            this.heroes.push(new Hero(heroName));
+        }
+        switch (this.heroes.length) {
+            case 2:
+                this.ROUNDS = 9;
+                this.DIE_FACES_PER_POOL = 2;
+                break;
+            case 3:
+                this.ROUNDS = 2; // FIXME 10
+                this.DIE_FACES_PER_POOL = 4;
+                this.heroes[2].inventory.goldNuggets = 1;
+                break;
+            case 4:
+                this.ROUNDS = 9;
+                this.DIE_FACES_PER_POOL = 4;
+                this.heroes[2].inventory.goldNuggets = 1;
+                this.heroes[3].inventory.goldNuggets = 0;
+                break;
+            default:
+                throw new Error("There must be between 2 and 4 heroes.");
+        }
+        this.heroes[0].inventory.goldNuggets = 3;
+        this.heroes[1].inventory.goldNuggets = 2;
+        this.CARDS_PER_STACK = this.heroes.length;
+        this.currentRound = 1; // 1-based
+        this.activeHeroIndex = 0; // 0-based
+        this.sanctuary = new Sanctuary(this.DIE_FACES_PER_POOL);
+        this.islands = new Islands(this.heroes.length);
     }
 
-    public addHero = (name: string) : void => {
-        if (this.hasStarted) {
-            console.log("Cannot add a hero after the game has started.");
-            return;
-        }
-        let hero: Hero = new Hero(name);
-        switch (this.heroes.length) {
-            case 0:
-                hero.inventory.addGoldNuggets(3);
-                break;
-            case 1:
-                hero.inventory.addGoldNuggets(2);
-                break;
-            case 2:
-                hero.inventory.addGoldNuggets(1);
-                break;
-        }
-        this.heroes.push(hero);
+    public getActiveHero = (): Hero => {
+        return this.heroes[this.activeHeroIndex];
     };
 
-    public start = () : void => {
-        if (this.hasStarted) {
-            console.log("The game has already started.");
-            return;
-        }
-        if (this.heroes.length < 2 || this.heroes.length > 4) {
-            console.log("There must be between 2 and 4 heroes.");
-            return;
-        }
-        this.hasStarted = true;
-        this.currentRound = 1; // 1-based
-        this.currentHeroIndex = 0; // 0-based
-
-        this.islands = new Islands(this.heroes.length);
-        console.log(this.islands);
-    };
-
-    public playHeroTurn = () : void => {
-        let currentHero: Hero = this.heroes[this.currentHeroIndex];
-
-        console.log("This is " + currentHero.name + "'s turn in round #" + this.currentRound);
-
-        console.log("All heroes receive their divine blessings...");
-        for (let hero of this.heroes) {
-            console.log(hero.name + " receives his/her divine blessing");
-            hero.receiveDivineBlessings();
-            console.log(hero.toString());
-        }
-
-        console.log(currentHero.name + " may call for reinforcements");
-        // TODO
-
-        console.log(currentHero.name + " performs an action");
-        // ActionType actionType = currentHero.pickAction(currentHero.getName() + ", please select an action : ");
-        // switch (actionType) {
-        //     case MAKE_AN_OFFERING_TO_THE_GODS:
-               // currentHero.makeAnOfferingToTheGods(this.sanctuary, currentHero.name + ", please select the die face you want to buy : ");
-                //console.log("After the offering : " + hero.toString());
-            //     break;
-            // case PERFORM_AN_HEROIC_FEAT:
-            //     console.log("Not yet implemented");
-            //     break;
-        // }
-
-        // Preparing next turn
-        this.currentHeroIndex = (this.currentHeroIndex + 1) % this.heroes.length;
-        if (this.currentHeroIndex == 0) {
+    public endHeroTurn = (): void => {
+        this.activeHeroIndex = (this.activeHeroIndex + 1) % this.heroes.length;
+        if (this.activeHeroIndex == 0) {
             this.currentRound++;
-            if (this.currentRound > Game.ROUNDS) {
-                console.log("The game is over.");
-                this.isOver = true;
-            }
         }
+    };
+
+    public isOver = (): boolean => {
+        return (this.currentRound > this.ROUNDS);
+    };
+
+    public getWinners = (): Hero[] => {
+        let maxScore: number = Math.max.apply(Math, this.heroes.map(hero => hero.inventory.gloryPoints));
+        return this.heroes.filter(hero => hero.inventory.gloryPoints == maxScore);
     };
 }

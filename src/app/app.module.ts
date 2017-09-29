@@ -6,6 +6,7 @@ import {AppComponent} from './components/app.component';
 import {DieDetailComponent} from './components/die-detail/die-detail.component';
 import {DieFaceDetailComponent} from './components/die-face-detail/die-face-detail.component';
 import {HeroDetailComponent} from './components/hero-detail/hero-detail.component';
+import {HeroListComponent} from './components/hero-list/hero-list.component';
 import {ResourcesDetailComponent} from './components/resources-detail/resources-detail.component';
 import {SanctuaryDetailComponent} from "./components/sanctuary-detail/sanctuary-detail.component";
 import {TimesPipe} from "./pipes/times.pipe";
@@ -14,6 +15,7 @@ import {TimesPipe} from "./pipes/times.pipe";
     declarations: [
         AppComponent,
         HeroDetailComponent,
+        HeroListComponent,
         DieDetailComponent,
         DieFaceDetailComponent,
         ResourcesDetailComponent,

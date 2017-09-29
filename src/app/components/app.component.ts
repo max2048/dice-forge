@@ -7,31 +7,11 @@ import {Game} from "../model/game";
     styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+
     game: Game;
 
-    constructor() {
-    }
-
     ngOnInit() {
-        this.newGame();
-    }
-
-    newGame() {
-        this.game = new Game();
-        this.game.addHero("Audrey");
-        this.game.addHero("Florian");
-        this.game.addHero("Dany");
-    }
-
-    startGame() {
-        this.game.start();
-    }
-
-    playHeroTurn() {
-        this.game.playHeroTurn();
-    }
-
-    endGame() {
-        this.game = null;
+        this.game = new Game(["Audrey", "Florian", "Dany"]);
+        this.game.heroes[0].inventory.gloryPoints = 3;
     }
 }

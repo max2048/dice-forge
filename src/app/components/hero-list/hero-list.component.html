@@ -1,0 +1,34 @@
+<div class="card">
+    <div class="card-header">
+        Heroes
+    </div>
+    <div class="card-block">
+        <table class="table table-sm">
+            <tbody>
+            <tr *ngFor="let hero of heroes">
+                <td class="hero-name align-middle">
+                    {{hero.name}}
+                </td>
+                <td class="align-middle text-center">
+                    <img class="resource" [src]="imageFolder + 'resources/glory-point.png'"/> {{hero.inventory.gloryPoints}}
+                </td>
+                <td class="align-middle text-center">
+                    <img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/> {{hero.inventory.goldNuggets}}/{{hero.inventory.getActualGoldNuggetsLimit()}}
+                </td>
+                <td class="align-middle text-center">
+                    <img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/> {{hero.inventory.sunShards}}/{{hero.inventory.getActualSunShardsLimit()}}
+                </td>
+                <td class="align-middle text-center">
+                    <img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/> {{hero.inventory.moonShards}}/{{hero.inventory.getActualMoonShardsLimit()}}
+                </td>
+                <td class="dice-faces align-middle text-center">
+                    <die-detail [die]="hero.inventory.lightDie"></die-detail>
+                </td>
+                <td class="dice-faces align-middle text-center">
+                    <die-detail [die]="hero.inventory.darkDie"></die-detail>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

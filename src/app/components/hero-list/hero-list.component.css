@@ -1,0 +1,16 @@
+.table  {
+    margin-bottom: 0;
+}
+
+.resource {
+    width: 30px;
+    height: 30px;
+}
+
+.hero-name {
+    padding-left: 1.25em;
+}
+
+.dice-faces {
+    width: 300px;
+}

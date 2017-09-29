@@ -1,25 +1,37 @@
 <div class="container-fluid">
-    <h1>Dice Forge</h1>
+    <h1 class="title">Dice Forge</h1>
 
-    <div *ngIf="game; else elseBlock">
-        <h2 *ngIf="this.game.hasStarted && !this.game.isOver">Round {{this.game.currentRound}}</h2>
-        <h2 *ngIf="this.game.isOver">The game is over.</h2>
-        <div class="row">
-            <div class="col-md-4" *ngFor="let hero of game.heroes">
-               <hero-detail [hero]="hero"></hero-detail>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <div *ngIf="!game.isOver(); else gameOver">
+                        Round: <strong>{{game.currentRound}}</strong><br/>
+                        Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
+                        <br/>
+                        <button (click)="game.endHeroTurn()">End turn</button>
+                    </div>
+                    <ng-template #gameOver>
+                        The game is over.<br/>
+                        <br/>
+                        Winner(s): <strong *ngFor="let hero of game.getWinners()">{{hero.name}} </strong>
+                    </ng-template>
+                </div>
             </div>
         </div>
-        <div class="row mt-4">
-            <div class="col-md-12">
-                <sanctuary-detail [sanctuary]="this.game.sanctuary"></sanctuary-detail>
-            </div>
+        <div class="col-md-9">
+            <hero-list [heroes]="game.heroes"></hero-list>
+            <!--<div class="row">-->
+            <!--<div class="col-md-4" *ngFor="let hero of game.heroes">-->
+            <!--<hero-detail [hero]="hero"></hero-detail>-->
+            <!--</div>-->
+            <!--</div>-->
         </div>
-
-        <button *ngIf="!this.game.hasStarted" (click)="startGame()">Start game</button>
-        <button *ngIf="this.game.hasStarted && !this.game.isOver" (click)="playHeroTurn()">Play {{this.game.heroes[this.game.currentHeroIndex].name}}'s turn</button>
-        <button *ngIf="this.game.hasStarted" (click)="endGame()">End game</button>
     </div>
-    <ng-template #elseBlock>
-        <button (click)="newGame()">New game</button>
-    </ng-template>
+    <div class="row mt-4">
+        <div class="col-md-12">
+            <sanctuary-detail [sanctuary]="game.sanctuary"></sanctuary-detail>
+        </div>
+    </div>
 </div>
+
