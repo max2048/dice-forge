@@ -1,0 +1,23 @@
+<div class="card">
+    <div class="card-body">
+        <div *ngIf="!game.isOver(); else gameOver">
+            Round: <strong>{{game.currentRound}}</strong><br/>
+            Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
+
+
+            <div *ngIf="game.currentStep.TYPE == 0">
+                Step: <strong>All players receive divine blessings</strong><br/>
+                <button (click)="game.currentStep.execute()">Roll dice</button>
+            </div>
+            <div *ngIf="game.currentStep.TYPE == 1">
+                Step: <strong>Active hero may call for reinforcements</strong><br/>
+                <button (click)="game.currentStep.execute()">Call for reinforcements</button>
+            </div>
+        </div>
+        <ng-template #gameOver>
+            The game is over.<br/>
+            <br/>
+            Winner(s): <strong *ngFor="let hero of game.getWinners()">{{hero.name}} </strong>
+        </ng-template>
+    </div>
+</div>

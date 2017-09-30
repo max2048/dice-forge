@@ -1,9 +1,0 @@
-<div>
-    <img *ngFor="let x of inventory.getActualGoldNuggetsLimit() | times" [ngClass]="{'resource': true, 'disabled': (x > inventory.goldNuggets)}" [src]="imageFolder + 'resources/gold-nugget.png'" />
-</div>
-<div>
-    <img *ngFor="let x of inventory.getActualSunShardsLimit() | times" [ngClass]="{'resource': true, 'disabled': (x > inventory.sunShards)}" [src]="imageFolder + 'resources/sun-shard.png'" />
-</div>
-<div>
-    <img *ngFor="let x of inventory.getActualMoonShardsLimit() | times" [ngClass]="{'resource': true, 'disabled': (x > inventory.moonShards)}" [src]="imageFolder + 'resources/moon-shard.png'" />
-</div>

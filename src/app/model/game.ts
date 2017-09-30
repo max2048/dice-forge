@@ -1,6 +1,9 @@
 import {Hero} from "./hero";
 import {Sanctuary} from "./sanctuary";
 import {Islands} from "./islands";
+import {Step} from "./steps/step";
+import {ReceiveDivineBlessingsStep} from "./steps/receive-divine-blessings-step";
+import {CallForReinforcementsStep} from "./steps/call-for-reinforcements-step";
 
 export class Game {
 
@@ -8,11 +11,13 @@ export class Game {
     readonly CARDS_PER_STACK: number;
     readonly DIE_FACES_PER_POOL: number;
 
-    currentRound: number;
     heroes: Hero[];
-    activeHeroIndex: number;
     sanctuary: Sanctuary;
     islands: Islands;
+
+    currentRound: number;
+    activeHeroIndex: number;
+    currentStep: Step;
 
     constructor(readonly heroNames: string[]) {
         this.heroes = [];
@@ -41,21 +46,15 @@ export class Game {
         this.heroes[0].inventory.goldNuggets = 3;
         this.heroes[1].inventory.goldNuggets = 2;
         this.CARDS_PER_STACK = this.heroes.length;
-        this.currentRound = 1; // 1-based
-        this.activeHeroIndex = 0; // 0-based
         this.sanctuary = new Sanctuary(this.DIE_FACES_PER_POOL);
         this.islands = new Islands(this.heroes.length);
+        this.currentRound = 1; // 1-based
+        this.activeHeroIndex = 0; // 0-based
+        this.currentStep = new ReceiveDivineBlessingsStep(this);
     }
 
     public getActiveHero = (): Hero => {
         return this.heroes[this.activeHeroIndex];
-    };
-
-    public endHeroTurn = (): void => {
-        this.activeHeroIndex = (this.activeHeroIndex + 1) % this.heroes.length;
-        if (this.activeHeroIndex == 0) {
-            this.currentRound++;
-        }
     };
 
     public isOver = (): boolean => {
@@ -65,5 +64,23 @@ export class Game {
     public getWinners = (): Hero[] => {
         let maxScore: number = Math.max.apply(Math, this.heroes.map(hero => hero.inventory.gloryPoints));
         return this.heroes.filter(hero => hero.inventory.gloryPoints == maxScore);
+    };
+
+    public endHeroTurn = (): void => {
+        this.activeHeroIndex = (this.activeHeroIndex + 1) % this.heroes.length;
+        if (this.activeHeroIndex == 0) {
+            this.currentRound++;
+        }
+        this.currentStep = new ReceiveDivineBlessingsStep(this);
+    };
+
+    public receiveDivineBlessingsEnded = (): void => {
+        console.log("Step receiveDivineBlessings has ended. Moving on to next step...");
+        this.currentStep = new CallForReinforcementsStep(this);
+    };
+
+    public callForReinforcementsStepEnded = (): void => {
+        console.log("Step callForReinforcements has ended. Ending hero's turn...");
+        this.endHeroTurn();
     };
 }

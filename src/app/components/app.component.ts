@@ -12,6 +12,5 @@ export class AppComponent implements OnInit {
 
     ngOnInit() {
         this.game = new Game(["Audrey", "Florian", "Dany"]);
-        this.game.heroes[0].inventory.gloryPoints = 3;
     }
 }

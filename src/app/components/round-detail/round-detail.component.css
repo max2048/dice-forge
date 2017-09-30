@@ -1,0 +1,16 @@
+.disabled {
+    filter: grayscale(100%);
+    opacity: 0.2;
+}
+
+.step {
+
+}
+
+.step-detail {
+    margin-left: 20px;
+}
+
+.step.disabled .step-detail {
+    display: none;
+}

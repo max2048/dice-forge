@@ -1,6 +1,5 @@
 import {BaseObject} from "./base-object";
 import {Inventory} from "./inventory";
-import {Die} from "./die";
 import {DieFace} from "./die-face";
 import {DieFaceType} from "./die-face-type";
 
@@ -12,16 +11,14 @@ export class Hero extends BaseObject {
         super();
     }
 
-    public receiveDivineBlessings = () : void => {
-        console.log("Rolling light die...");
-        this.receiveMinorBlessing(this.inventory.lightDie);
-        console.log("Rolling dark die...");
-        this.receiveMinorBlessing(this.inventory.darkDie);
-    };
+    // public receiveDivineBlessings = () : void => {
+    //     console.log("Rolling light die...");
+    //     this.receiveMinorBlessing(this.inventory.lightDie);
+    //     console.log("Rolling dark die...");
+    //     this.receiveMinorBlessing(this.inventory.darkDie);
+    // };
 
-    public receiveMinorBlessing = (die: Die) : void => {
-        let dieFace: DieFace = die.roll();
-        console.log("Rolled face " + dieFace);
+    public receiveMinorBlessing = (dieFace: DieFace) : void => {
         if (dieFace.type == DieFaceType.OR) {
             let done: boolean = false;
             while (!done) {
