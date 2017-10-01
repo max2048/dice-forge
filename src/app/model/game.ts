@@ -10,6 +10,7 @@ export class Game {
     readonly ROUNDS: number;
     readonly CARDS_PER_STACK: number;
     readonly DIE_FACES_PER_POOL: number;
+    readonly PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN: boolean;
 
     heroes: Hero[];
     sanctuary: Sanctuary;
@@ -18,6 +19,7 @@ export class Game {
     currentRound: number;
     activeHeroIndex: number;
     currentStep: Step;
+    divineBlessingsStepAlreadyPerformedTwiceThisTurn;
 
     constructor(readonly heroNames: string[]) {
         this.heroes = [];
@@ -28,15 +30,18 @@ export class Game {
             case 2:
                 this.ROUNDS = 9;
                 this.DIE_FACES_PER_POOL = 2;
+                this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = true;
                 break;
             case 3:
                 this.ROUNDS = 2; // FIXME 10
                 this.DIE_FACES_PER_POOL = 4;
+                this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = false;
                 this.heroes[2].inventory.goldNuggets = 1;
                 break;
             case 4:
                 this.ROUNDS = 9;
                 this.DIE_FACES_PER_POOL = 4;
+                this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = false;
                 this.heroes[2].inventory.goldNuggets = 1;
                 this.heroes[3].inventory.goldNuggets = 0;
                 break;
@@ -50,7 +55,8 @@ export class Game {
         this.islands = new Islands(this.heroes.length);
         this.currentRound = 1; // 1-based
         this.activeHeroIndex = 0; // 0-based
-        this.currentStep = new ReceiveDivineBlessingsStep(this);
+        this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
+        this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = false;
     }
 
     public getActiveHero = (): Hero => {
@@ -71,16 +77,22 @@ export class Game {
         if (this.activeHeroIndex == 0) {
             this.currentRound++;
         }
-        this.currentStep = new ReceiveDivineBlessingsStep(this);
+        this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
     };
 
-    public receiveDivineBlessingsEnded = (): void => {
-        console.log("Step receiveDivineBlessings has ended. Moving on to next step...");
-        this.currentStep = new CallForReinforcementsStep(this);
+    private receiveDivineBlessingsStepEnded = (): void => {
+        console.log("Step allHeroesReceiveDivineBlessings has ended. Moving on to next step...");
+        if (this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN && !this.divineBlessingsStepAlreadyPerformedTwiceThisTurn) {
+            this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
+            this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
+        } else {
+            this.currentStep = new CallForReinforcementsStep(this.callForReinforcementsStepEnded);
+        }
     };
 
-    public callForReinforcementsStepEnded = (): void => {
+    private callForReinforcementsStepEnded = (): void => {
         console.log("Step callForReinforcements has ended. Ending hero's turn...");
+        // TODO Handle next steps
         this.endHeroTurn();
     };
 }

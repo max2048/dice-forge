@@ -10,7 +10,7 @@ export class Die extends BaseObject {
         this.faces.push(dieFace);
     };
 
-    public setFace = (index: number, dieFace: DieFace) : void => {
+    public forgeFace = (index: number, dieFace: DieFace) : void => {
         this.lastRolledFace = dieFace;
         this.faces[index] = dieFace;
     };

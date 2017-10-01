@@ -2,15 +2,16 @@ import {Step} from "./step";
 import {StepType} from "./step-type";
 import {Game} from "../game";
 
-export class CallForReinforcementsStep implements Step {
+export class CallForReinforcementsStep extends Step {
 
     TYPE = StepType.CALL_FOR_REINFORCEMENTS;
 
-    constructor(readonly game: Game) {
+    constructor(private readonly callbackFunction: () => void) {
+        super();
     }
 
-    execute(): void {
+    todo(): void {
         console.log("Reinforcements were called");
-        this.game.callForReinforcementsStepEnded();
+        this.callbackFunction();
     }
 }

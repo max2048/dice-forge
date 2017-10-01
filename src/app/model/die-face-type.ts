@@ -1,4 +1,4 @@
 export enum DieFaceType {
-    AND,
-    OR
+    GAIN_ALL_RESOURCES = 0,
+    GAIN_ONE_KIND_OF_RESOURCE = 1
 }

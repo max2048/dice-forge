@@ -36,17 +36,17 @@ export class Sanctuary {
         this.pools.push(pool);
 
         pool = new Pool(4);
-        pool.addDieFace(new DieFace(4, 1, 1, 1, 0, "die-faces/df07.png", DieFaceType.OR));
+        pool.addDieFace(new DieFace(4, 1, 1, 1, 0, "die-faces/df07.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
         pool.addDieFace(new DieFace(4, 6, 0, 0, 0, "die-faces/df08.png"));
-        pool.addDieFace(new DieFace(4, 2, 0, 1, 0, "die-faces/df09.png", DieFaceType.AND));
-        pool.addDieFace(new DieFace(4, 0, 1, 0, 1, "die-faces/df10.png", DieFaceType.AND));
+        pool.addDieFace(new DieFace(4, 2, 0, 1, 0, "die-faces/df09.png"));
+        pool.addDieFace(new DieFace(4, 0, 1, 0, 1, "die-faces/df10.png"));
         this.pools.push(pool);
 
         pool = new Pool(5);
-        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.OR));
-        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.OR));
-        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.OR));
-        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.OR));
+        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        pool.addDieFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
         this.pools.push(pool);
 
         pool = new Pool(6);
@@ -71,9 +71,9 @@ export class Sanctuary {
         this.pools.push(pool);
 
         pool = new Pool(12);
-        pool.addDieFace(new DieFace(12, 1, 1, 1, 1, "die-faces/df15.png", DieFaceType.AND));
-        pool.addDieFace(new DieFace(12, 2, 2, 2, 0, "die-faces/df16.png", DieFaceType.OR));
-        pool.addDieFace(new DieFace(12, 0, 0, 2, 2, "die-faces/df17.png", DieFaceType.AND));
+        pool.addDieFace(new DieFace(12, 1, 1, 1, 1, "die-faces/df15.png"));
+        pool.addDieFace(new DieFace(12, 2, 2, 2, 0, "die-faces/df16.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        pool.addDieFace(new DieFace(12, 0, 0, 2, 2, "die-faces/df17.png"));
         pool.addDieFace(new DieFace(12, 0, 0, 0, 4, "die-faces/df18.png"));
         this.pools.push(pool);
 

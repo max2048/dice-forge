@@ -9,6 +9,7 @@ import {Die} from "../../model/die";
 export class DieDetailComponent implements OnInit {
 
     @Input() die: Die;
+    @Input() highlightTopFace: boolean = true;
 
     constructor() {
     }

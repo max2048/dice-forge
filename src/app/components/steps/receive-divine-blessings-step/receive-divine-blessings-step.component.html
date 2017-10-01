@@ -1,0 +1,12 @@
+<div class="step-block">
+    Step: <strong>All players receive divine blessings</strong><br/>
+    <div *ngIf="!step.rollAllHeroesDiceStep.isDone; else allDiceRolled">
+        First, they all roll their dice.<br/>
+        <roll-all-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-all-heroes-dice-step>
+    </div>
+    <ng-template #allDiceRolled>
+        All heroes have rolled their dice.<br/>
+        <apply-die-face-effects-step [step]="step.applyLightDieFaceEffectsStep"></apply-die-face-effects-step>
+        <apply-die-face-effects-step [step]="step.applyDarkDieFaceEffectsStep"></apply-die-face-effects-step>
+    </ng-template>
+</div>

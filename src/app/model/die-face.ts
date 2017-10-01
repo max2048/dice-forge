@@ -9,7 +9,7 @@ export class DieFace extends BaseObject {
                 readonly moonShardsQuantity: number,
                 readonly gloryPointsQuantity: number,
                 readonly imageFile: string,
-                readonly type: DieFaceType = null) {
+                readonly type: DieFaceType = DieFaceType.GAIN_ALL_RESOURCES) {
         super();
     }
 

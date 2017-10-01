@@ -1,5 +1,6 @@
 import {Die} from "./die";
 import {DieFace} from "./die-face";
+import {DieFaceType} from "./die-face-type";
 
 export class Inventory {
 
@@ -22,19 +23,34 @@ export class Inventory {
     darkDie: Die = new Die();
 
     constructor() {
+        // this.lightDie.addFace(new DieFace(0, 0, 1, 0, 0, "die-faces/df06.png"));
+        // this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        //
+        // this.darkDie.addFace(new DieFace(0, 0, 0, 0, 2, "die-faces/df02.png"));
+        // this.darkDie.addFace(new DieFace(0, 0, 0, 1, 0, "die-faces/df04.png"));
+        // this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        // this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+
+        // FIXME For tests only
         this.lightDie.addFace(new DieFace(0, 0, 1, 0, 0, "die-faces/df06.png"));
         this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.lightDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        this.lightDie.addFace(new DieFace(12, 0, 0, 0, 4, "die-faces/df18.png"));
+        this.lightDie.addFace(new DieFace(12, 2, 2, 2, 0, "die-faces/df16.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        this.lightDie.addFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        this.lightDie.addFace(new DieFace(12, 1, 1, 1, 1, "die-faces/df15.png"));
 
         this.darkDie.addFace(new DieFace(0, 0, 0, 0, 2, "die-faces/df02.png"));
         this.darkDie.addFace(new DieFace(0, 0, 0, 1, 0, "die-faces/df04.png"));
-        this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
-        this.darkDie.addFace(new DieFace(0, 1, 0, 0, 0, "die-faces/df01.png"));
+        this.darkDie.addFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        this.darkDie.addFace(new DieFace(12, 2, 2, 2, 0, "die-faces/df16.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
+        this.darkDie.addFace(new DieFace(12, 1, 1, 1, 1, "die-faces/df15.png"));
+        this.darkDie.addFace(new DieFace(4, 1, 1, 1, 0, "die-faces/df07.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
     }
 
     public getActualGoldNuggetsLimit = () : number => {

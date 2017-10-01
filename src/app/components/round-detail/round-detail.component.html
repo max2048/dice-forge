@@ -4,14 +4,11 @@
             Round: <strong>{{game.currentRound}}</strong><br/>
             Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
 
-
             <div *ngIf="game.currentStep.TYPE == 0">
-                Step: <strong>All players receive divine blessings</strong><br/>
-                <button (click)="game.currentStep.execute()">Roll dice</button>
+                <receive-divine-blessings-step [step]="game.currentStep"></receive-divine-blessings-step>
             </div>
             <div *ngIf="game.currentStep.TYPE == 1">
-                Step: <strong>Active hero may call for reinforcements</strong><br/>
-                <button (click)="game.currentStep.execute()">Call for reinforcements</button>
+                <call-for-reinforcements-step [step]="game.currentStep"></call-for-reinforcements-step>
             </div>
         </div>
         <ng-template #gameOver>

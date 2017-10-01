@@ -1,7 +1,5 @@
 import {BaseObject} from "./base-object";
 import {Inventory} from "./inventory";
-import {DieFace} from "./die-face";
-import {DieFaceType} from "./die-face-type";
 
 export class Hero extends BaseObject {
 
@@ -11,48 +9,14 @@ export class Hero extends BaseObject {
         super();
     }
 
-    // public receiveDivineBlessings = () : void => {
-    //     console.log("Rolling light die...");
-    //     this.receiveMinorBlessing(this.inventory.lightDie);
-    //     console.log("Rolling dark die...");
-    //     this.receiveMinorBlessing(this.inventory.darkDie);
-    // };
+    public rollLightDie = (): void => {
+        console.log(this.name + " is rolling his/her light die.");
+        this.inventory.lightDie.roll();
+    };
 
-    public receiveMinorBlessing = (dieFace: DieFace) : void => {
-        if (dieFace.type == DieFaceType.OR) {
-            let done: boolean = false;
-            while (!done) {
-                if (!done && dieFace.goldNuggetsQuantity > 0) {
-                    if (this.ask(this.name + ", do you take the " + dieFace.goldNuggetsQuantity + " gold nugget(s) ?")) {
-                        this.inventory.addGoldNuggets(dieFace.goldNuggetsQuantity);
-                        done = true;
-                    }
-                }
-                if (!done && dieFace.sunShardsQuantity > 0) {
-                    if (this.ask(this.name + ", do you take the " + dieFace.sunShardsQuantity + " sun shard(s) ?")) {
-                        this.inventory.addSunShards(dieFace.sunShardsQuantity);
-                        done = true;
-                    }
-                }
-                if (!done && dieFace.moonShardsQuantity > 0) {
-                    if (this.ask(this.name + ", do you take the " + dieFace.moonShardsQuantity + " moon shard(s) ?")) {
-                        this.inventory.addMoonShards(dieFace.moonShardsQuantity);
-                        done = true;
-                    }
-                }
-                if (!done && dieFace.gloryPointsQuantity > 0) {
-                    if (this.ask(this.name + ", do you take the " + dieFace.gloryPointsQuantity + " glory point(s) ?")) {
-                        this.inventory.addGloryPoints(dieFace.gloryPointsQuantity);
-                        done = true;
-                    }
-                }
-            }
-        } else {
-            this.inventory.addGoldNuggets(dieFace.goldNuggetsQuantity);
-            this.inventory.addSunShards(dieFace.sunShardsQuantity);
-            this.inventory.addMoonShards(dieFace.moonShardsQuantity);
-            this.inventory.addGloryPoints(dieFace.gloryPointsQuantity);
-        }
+    public rollDarkDie = (): void => {
+        console.log(this.name + " is rolling his/her dark die.");
+        this.inventory.darkDie.roll();
     };
 
     // public makeAnOfferingToTheGods = (sanctuary: Sanctuary, question: string) : void => {
@@ -88,14 +52,6 @@ export class Hero extends BaseObject {
     //         }
     //     }
     // };
-
-    public ask = (question: string) : boolean => {
-        let answer: boolean = null;
-        while (answer === null) {
-            answer = confirm(question);
-        }
-        return answer;
-    };
 
     public toString = () : string => {
         return `Hero (` +

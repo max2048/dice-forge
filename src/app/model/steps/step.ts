@@ -1,8 +1,7 @@
 import {StepType} from "./step-type";
 
-export interface Step {
+export abstract class Step {
 
     readonly TYPE: StepType;
-
-    execute(): void;
+    isDone: boolean;
 }

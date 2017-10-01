@@ -1,5 +1,3 @@
-<div>
-    <div *ngFor="let dieFace of die.faces" [ngClass]="{'die-face-container': true, 'lastly-rolled': die.lastRolledFace && die.lastRolledFace.id == dieFace.id}">
-        <die-face-detail [dieFace]="dieFace"></die-face-detail>
-    </div>
+<div *ngFor="let dieFace of die.faces" [ngClass]="{'die-face-container': true, 'highlight': highlightTopFace && (die.lastRolledFace && die.lastRolledFace.id == dieFace.id)}">
+    <die-face-detail [dieFace]="dieFace"></die-face-detail>
 </div>
