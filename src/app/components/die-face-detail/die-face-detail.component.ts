@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {DieFace} from "../../model/die-face";
 import {configuration} from "../../app.config";
 
@@ -7,15 +7,9 @@ import {configuration} from "../../app.config";
     templateUrl: './die-face-detail.component.html',
     styleUrls: ['./die-face-detail.component.css']
 })
-export class DieFaceDetailComponent implements OnInit {
+export class DieFaceDetailComponent {
 
     @Input() dieFace: DieFace;
-
-    constructor() {
-    }
-
-    ngOnInit() {
-    }
 
     get dieFaceImageFile() {
         return configuration.imageFolder + this.dieFace.imageFile;

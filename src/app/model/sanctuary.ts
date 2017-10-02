@@ -85,14 +85,29 @@ export class Sanctuary {
         }
     }
 
-    public getAffordablePools = (goldNuggetBudget: number): Pool[] => {
-        return this.pools.filter(pool => pool.dieFaceCost <= goldNuggetBudget);
+    public getNotEmptyPools = (): Pool[] => {
+        return this.pools.filter(pool => pool.dieFaces.length > 0);
     };
 
-    public removeDieFace = (dieFaceId: number): void => {
+    public getSmallestDieFaceCost = (): number => {
+        return Math.min.apply(Math, this.getNotEmptyPools().map(pool => pool.dieFaceCost))
+    };
+
+    public getAffordablePools = (goldNuggetBudget: number): Pool[] => {
+        return this.getNotEmptyPools().filter(pool => pool.dieFaceCost <= goldNuggetBudget);
+    };
+
+    public containsDieFace = (dieFace: DieFace): boolean => {
+        return this.pools.some(pool => pool.containsDiceFace(dieFace));
+    };
+
+    public removeDieFace = (dieFace: DieFace): boolean => {
         for (let pool of this.pools) {
-            pool.removeDieFace(dieFaceId);
+            if (pool.removeDieFace(dieFace)) {
+                return true;
+            }
         }
+        return false;
     };
 
     public toString = (): string => {

@@ -7,4 +7,5 @@
 .disabled {
     filter: grayscale(100%);
     opacity: 0.2;
+    cursor: not-allowed;
 }

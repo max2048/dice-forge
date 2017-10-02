@@ -2,7 +2,7 @@ import {DieFace} from "./die-face";
 
 export class Pool {
 
-    dieFaces: DieFace[];
+    readonly dieFaces: DieFace[];
 
     constructor(readonly dieFaceCost: number) {
         this.dieFaces = [];
@@ -15,11 +15,19 @@ export class Pool {
         this.dieFaces.push(dieFace);
     };
 
-    public removeDieFace = (dieFaceId: number): void => {
-        this.dieFaces = this.dieFaces.filter(dieFace => dieFace.id !== dieFaceId);
+    public containsDiceFace = (dieFace: DieFace): boolean => {
+        return this.dieFaces.indexOf(dieFace) >= 0;
     };
 
-    public toString = () : string => {
+    public removeDieFace = (dieFace: DieFace): boolean => {
+        let dieFaceIndex: number = this.dieFaces.indexOf(dieFace);
+        if (dieFaceIndex >= 0) {
+            return (this.dieFaces.splice(dieFaceIndex, 1) != null);
+        }
+        return false;
+    };
+
+    public toString = (): string => {
         return `Pool (` +
             `dieFaceCost=[${this.dieFaceCost}], ` +
             `dieFaces=[${this.dieFaces}]` +

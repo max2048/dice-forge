@@ -9,6 +9,7 @@ import {StepType} from "./steps/step-type";
 import {MakeOfferingToGodsStep} from "./steps/make-offering-to-gods-step";
 import {PerformHeroicFeatStep} from "./steps/perform-heroic-feat-step";
 import {SelectExtraActionToPerformStep} from "./steps/select-extra-action-to-perform-step";
+import {DieFace} from "./die-face";
 
 export class Game {
 
@@ -170,5 +171,25 @@ export class Game {
     private extraPerformHeroicFeatStepEnded = (): void => {
         console.log("Step extraPerformHeroicFeatStep has ended.");
         this.endHeroTurn();
+    };
+
+    public forge = (hero: Hero, oldDieFace: DieFace, newDieFace: DieFace): void => {
+        if (hero.inventory.goldNuggets < newDieFace.cost) {
+            throw new Error(hero.name + " can't afford " + newDieFace);
+        }
+        if (!this.sanctuary.containsDieFace(newDieFace)) {
+            throw new Error("Sanctuary doesn't contain die face " + newDieFace);
+        }
+        if (!hero.inventory.lightDie.containsFace(oldDieFace) && !hero.inventory.darkDie.containsFace(oldDieFace)) {
+            throw new Error(hero.name + " doesn't have a die with face " + newDieFace);
+        }
+
+        let newFaceSetOnHeroDie:boolean = hero.inventory.lightDie.setFace(oldDieFace, newDieFace) || hero.inventory.darkDie.setFace(oldDieFace, newDieFace);
+        let newFaceRemovedFromSanctuary:boolean = this.sanctuary.removeDieFace(newDieFace);
+        hero.inventory.addGoldNuggets(-1 * newDieFace.cost);
+
+        if (!newFaceSetOnHeroDie || !newFaceRemovedFromSanctuary) {
+            throw new Error("Something went wrong while forging die face " + newDieFace + " for " + hero.name);
+        }
     };
 }

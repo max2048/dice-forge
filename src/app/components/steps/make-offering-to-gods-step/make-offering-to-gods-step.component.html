@@ -1,4 +1,14 @@
 <div class="step-block">
     Step: <strong>Active hero makes an offering to the Gods</strong><br/>
-    <button (click)="step.todo()">TODO</button>
+
+    <div *ngIf="!step.newDieFace; else newDieFaceSelected">
+        Active hero may select a new die face to buy.
+        <sanctuary-detail [sanctuary]="step.game.sanctuary" [budget]="step.game.getActiveHero().inventory.goldNuggets" [clickCallback]="newDieFaceClicked"></sanctuary-detail>
+    </div>
+    <ng-template #newDieFaceSelected>
+        Active hero has selected <die-face-detail [dieFace]="step.newDieFace"></die-face-detail><br/>
+        He/she may select the old die face to be replaced with the new one.<br/>
+        <die-detail [die]="step.game.getActiveHero().inventory.lightDie" [clickCallback]="oldDieFaceClicked"></die-detail><br/>
+        <die-detail [die]="step.game.getActiveHero().inventory.darkDie" [clickCallback]="oldDieFaceClicked"></die-detail>
+    </ng-template>
 </div>

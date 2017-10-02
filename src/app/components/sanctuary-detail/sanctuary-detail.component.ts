@@ -1,6 +1,7 @@
 import {Component, Input} from '@angular/core';
 import {configuration} from "../../app.config";
 import {Sanctuary} from "../../model/sanctuary";
+import {DieFace} from "../../model/die-face";
 
 @Component({
     selector: 'sanctuary-detail',
@@ -11,6 +12,7 @@ export class SanctuaryDetailComponent {
 
     @Input() sanctuary: Sanctuary;
     @Input() budget: number;
+    @Input() clickCallback: (dieFace: DieFace) => void;
 
     constructor() {
     }

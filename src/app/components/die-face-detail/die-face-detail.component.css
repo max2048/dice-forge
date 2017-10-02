@@ -4,3 +4,11 @@
     height: 40px;
     border: 1px solid transparent;
 }
+
+.die-face:hover {
+    border: 1px solid black;
+}
+
+:host-context(.disabled) .die-face:hover {
+    border: 1px solid transparent !important;
+}

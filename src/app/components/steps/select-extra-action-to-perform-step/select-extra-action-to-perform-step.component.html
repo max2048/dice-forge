@@ -1,5 +1,5 @@
 <div class="step-block">
-    Step: <strong>Active hero mays select an extra action to perform, AT A COST OF 2 SUN SHARDS.</strong><br/>
+    Step: <strong>Active hero may select an extra action to perform, AT A COST OF 2 SUN SHARDS.</strong><br/>
     <div *ngIf="!step.isDone; else actionSelected">
         <button (click)="step.selectMakeOfferingToGods()">Make an offering to the Gods</button>
         <button (click)="step.selectPerformHeroicFeat()">Perform an Heroic feat</button>

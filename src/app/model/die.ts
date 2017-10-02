@@ -6,21 +6,30 @@ export class Die extends BaseObject {
     readonly faces: DieFace[] = [];
     lastRolledFace: DieFace;
 
-    public addFace = (dieFace: DieFace) : void => {
+    public addFace = (dieFace: DieFace): void => {
         this.faces.push(dieFace);
     };
 
-    public forgeFace = (index: number, dieFace: DieFace) : void => {
-        this.lastRolledFace = dieFace;
-        this.faces[index] = dieFace;
+    public containsFace = (dieFace: DieFace): boolean => {
+        return this.faces.indexOf(dieFace) >= 0;
     };
 
-    public roll = () : DieFace => {
+    public setFace = (oldDieFace: DieFace, newDieFace: DieFace): boolean => {
+        let oldDieFaceIndex: number = this.faces.indexOf(oldDieFace);
+        if (oldDieFaceIndex >= 0) {
+            this.faces[oldDieFaceIndex] = newDieFace;
+            this.lastRolledFace = newDieFace;
+            return true;
+        }
+        return false;
+    };
+
+    public roll = (): DieFace => {
         this.lastRolledFace = this.faces[Math.floor(Math.random() * this.faces.length)];
         return this.lastRolledFace;
     };
 
-    public toString = () : string => {
+    public toString = (): string => {
         return `Die (` +
             `id=[${this.id}], ` +
             `lastRolledFace=[${this.lastRolledFace}], ` +
