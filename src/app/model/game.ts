@@ -4,6 +4,11 @@ import {Islands} from "./islands";
 import {Step} from "./steps/step";
 import {ReceiveDivineBlessingsStep} from "./steps/receive-divine-blessings-step";
 import {CallForReinforcementsStep} from "./steps/call-for-reinforcements-step";
+import {SelectActionToPerformStep} from "./steps/select-action-to-perform-step";
+import {StepType} from "./steps/step-type";
+import {MakeOfferingToGodsStep} from "./steps/make-offering-to-gods-step";
+import {PerformHeroicFeatStep} from "./steps/perform-heroic-feat-step";
+import {SelectExtraActionToPerformStep} from "./steps/select-extra-action-to-perform-step";
 
 export class Game {
 
@@ -81,7 +86,7 @@ export class Game {
     };
 
     private receiveDivineBlessingsStepEnded = (): void => {
-        console.log("Step allHeroesReceiveDivineBlessings has ended. Moving on to next step...");
+        console.log("Step allHeroesReceiveDivineBlessings has ended.");
         if (this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN && !this.divineBlessingsStepAlreadyPerformedTwiceThisTurn) {
             this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
             this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
@@ -91,8 +96,79 @@ export class Game {
     };
 
     private callForReinforcementsStepEnded = (): void => {
-        console.log("Step callForReinforcements has ended. Ending hero's turn...");
-        // TODO Handle next steps
+        console.log("Step callForReinforcements has ended.");
+        this.currentStep = new SelectActionToPerformStep(this.selectActionToPerformEnded);
+    };
+
+    private selectActionToPerformEnded = (nextStep: StepType): void => {
+        console.log("Step selectActionToPerform has ended.");
+        console.log("Action to perform: " + nextStep);
+        switch (nextStep) {
+            case null:
+                this.currentStep = null;
+                this.endHeroTurn();
+                break;
+            case StepType.MAKE_OFFERING_TO_GODS:
+                this.currentStep = new MakeOfferingToGodsStep(this, this.makeOfferingToGodsStepEnded);
+                break;
+            case StepType.PERFORM_HEROIC_FEAT:
+                this.currentStep = new PerformHeroicFeatStep(this, this.performHeroicFeatStepEnded);
+                break;
+            default:
+                // Invalid choice
+                throw new Error("Hero made an invalid choice : [" + nextStep + "]");
+        }
+    };
+
+    private canActiveHeroAffordExtraAction = (): boolean => {
+        return (this.getActiveHero().inventory.sunShards >= 2);
+    };
+
+    private makeOfferingToGodsStepEnded = (): void => {
+        console.log("Step makeOfferingToGodsStep has ended.");
+        if (this.canActiveHeroAffordExtraAction()) {
+            this.currentStep = new SelectExtraActionToPerformStep(this.getActiveHero(), this.selectExtraActionToPerformEnded);
+        } else {
+            this.endHeroTurn();
+        }
+    };
+
+    private performHeroicFeatStepEnded = (): void => {
+        console.log("Step performHeroicFeatStep has ended.");
+        if (this.canActiveHeroAffordExtraAction()) {
+            this.currentStep = new SelectExtraActionToPerformStep(this.getActiveHero(), this.selectExtraActionToPerformEnded);
+        } else {
+            this.endHeroTurn();
+        }
+    };
+
+    private selectExtraActionToPerformEnded = (nextStep: StepType): void => {
+        console.log("Step selectExtraActionToPerform has ended.");
+        console.log("Extra action to perform: " + nextStep);
+        switch (nextStep) {
+            case null:
+                this.currentStep = null;
+                this.endHeroTurn();
+                break;
+            case StepType.MAKE_OFFERING_TO_GODS:
+                this.currentStep = new MakeOfferingToGodsStep(this, this.extraMakeOfferingToGodsStepEnded);
+                break;
+            case StepType.PERFORM_HEROIC_FEAT:
+                this.currentStep = new PerformHeroicFeatStep(this, this.extraPerformHeroicFeatStepEnded);
+                break;
+            default:
+                // Invalid choice
+                throw new Error("Hero made an invalid choice : [" + nextStep + "]");
+        }
+    };
+
+    private extraMakeOfferingToGodsStepEnded = (): void => {
+        console.log("Step extraMakeOfferingToGodsStep has ended.");
+        this.endHeroTurn();
+    };
+
+    private extraPerformHeroicFeatStepEnded = (): void => {
+        console.log("Step extraPerformHeroicFeatStep has ended.");
         this.endHeroTurn();
     };
 }

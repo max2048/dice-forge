@@ -1,15 +1,13 @@
 <div class="container-fluid">
-    <h1 class="title">Dice Forge</h1>
+    <!--<h1 class="title">Dice Forge</h1>-->
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-12">
             <round-detail [game]="game"></round-detail>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-12 mt-4">
             <hero-list [heroes]="game.heroes"></hero-list>
         </div>
-    </div>
-    <div class="row mt-4">
-        <div class="col-md-12">
+        <div class="col-md-12 mt-4">
             <sanctuary-detail [sanctuary]="game.sanctuary"></sanctuary-detail>
         </div>
     </div>

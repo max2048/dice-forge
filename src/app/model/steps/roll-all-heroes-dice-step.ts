@@ -9,7 +9,7 @@ export class RollAllHeroesDiceStep extends Step {
 
     rollHeroBothDiceSteps: RollHeroBothDiceStep[] = [];
 
-    constructor(private readonly game: Game,
+    constructor(readonly game: Game,
                 private readonly callbackFunction: () => void) {
         super();
         for (let hero of game.heroes) {

@@ -1,8 +1,10 @@
 <div class="step-block">
     <div *ngIf="!step.isDone; else allDiceRolled">
         Not all heroes have rolled their dice.<br/>
-        <div *ngFor="let rollHeroBothDiceStep of step.rollHeroBothDiceSteps">
-            <roll-hero-both-dice-step [step]="rollHeroBothDiceStep" *ngIf="!rollHeroBothDiceStep.isDone"></roll-hero-both-dice-step>
+        <div class="row">
+            <div *ngFor="let rollHeroBothDiceStep of step.rollHeroBothDiceSteps" [ngClass]="getCssClass()">
+                <roll-hero-both-dice-step [step]="rollHeroBothDiceStep"></roll-hero-both-dice-step>
+            </div>
         </div>
     </div>
     <ng-template #allDiceRolled>

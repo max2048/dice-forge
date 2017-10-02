@@ -1,14 +1,25 @@
 <div class="card">
     <div class="card-body">
         <div *ngIf="!game.isOver(); else gameOver">
-            Round: <strong>{{game.currentRound}}</strong><br/>
-            Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
+            Round: <strong>{{game.currentRound}}</strong> / Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
 
             <div *ngIf="game.currentStep.TYPE == 0">
                 <receive-divine-blessings-step [step]="game.currentStep"></receive-divine-blessings-step>
             </div>
             <div *ngIf="game.currentStep.TYPE == 1">
                 <call-for-reinforcements-step [step]="game.currentStep"></call-for-reinforcements-step>
+            </div>
+            <div *ngIf="game.currentStep.TYPE == 2">
+                <select-action-to-perform-step [step]="game.currentStep"></select-action-to-perform-step>
+            </div>
+            <div *ngIf="game.currentStep.TYPE == 3">
+                <make-offering-to-gods-step [step]="game.currentStep"></make-offering-to-gods-step>
+            </div>
+            <div *ngIf="game.currentStep.TYPE == 4">
+                <perform-heroic-feat-step [step]="game.currentStep"></perform-heroic-feat-step>
+            </div>
+            <div *ngIf="game.currentStep.TYPE == 5">
+                <select-extra-action-to-perform-step [step]="game.currentStep"></select-extra-action-to-perform-step>
             </div>
         </div>
         <ng-template #gameOver>

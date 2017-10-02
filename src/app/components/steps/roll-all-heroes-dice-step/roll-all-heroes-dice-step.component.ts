@@ -9,4 +9,15 @@ import {RollAllHeroesDiceStep} from "../../../model/steps/roll-all-heroes-dice-s
 export class RollAllHeroesDiceStepComponent {
 
     @Input() step: RollAllHeroesDiceStep;
+
+    public getCssClass = (): string => {
+        switch (this.step.game.heroes.length) {
+            case 2:
+                return "col-md-6";
+            case 3:
+                return "col-md-4";
+            default:
+                return "col-md-3";
+        }
+    };
 }
