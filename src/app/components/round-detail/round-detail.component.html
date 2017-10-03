@@ -1,31 +1,38 @@
 <div class="card">
-    <div class="card-body">
-        <div *ngIf="!game.isOver(); else gameOver">
-            Round: <strong>{{game.currentRound}}</strong> / Active hero: <strong>{{game.getActiveHero().name}}</strong><br/>
-
-            <div *ngIf="game.currentStep.TYPE == 0">
+    <div *ngIf="!game.isOver(); else gameOver">
+        <div class="card-header">
+            <span class="data">Round: <strong>{{game.currentRound}}/{{game.ROUNDS}}</strong></span>
+            <span class="data">Active hero: <strong>{{game.getActiveHero().name}}</strong></span>
+            <span class="data">Step: <strong>{{getStepTypeLabel(game.currentStep.TYPE)}}</strong></span>
+        </div>
+        <div class="card-body" [ngSwitch]="game.currentStep.TYPE">
+            <div *ngSwitchCase="ExportedStepType.RECEIVE_DIVINE_BLESSINGS" >
                 <receive-divine-blessings-step [step]="game.currentStep"></receive-divine-blessings-step>
             </div>
-            <div *ngIf="game.currentStep.TYPE == 1">
+            <div *ngSwitchCase="ExportedStepType.CALL_FOR_REINFORCEMENTS">
                 <call-for-reinforcements-step [step]="game.currentStep"></call-for-reinforcements-step>
             </div>
-            <div *ngIf="game.currentStep.TYPE == 2">
+            <div *ngSwitchCase="ExportedStepType.SELECT_ACTION_TO_PERFORM">
                 <select-action-to-perform-step [step]="game.currentStep"></select-action-to-perform-step>
             </div>
-            <div *ngIf="game.currentStep.TYPE == 3">
+            <div *ngSwitchCase="ExportedStepType.MAKE_OFFERING_TO_GODS">
                 <make-offering-to-gods-step [step]="game.currentStep"></make-offering-to-gods-step>
             </div>
-            <div *ngIf="game.currentStep.TYPE == 4">
+            <div *ngSwitchCase="ExportedStepType.PERFORM_HEROIC_FEAT">
                 <perform-heroic-feat-step [step]="game.currentStep"></perform-heroic-feat-step>
             </div>
-            <div *ngIf="game.currentStep.TYPE == 5">
+            <div *ngSwitchCase="ExportedStepType.SELECT_EXTRA_ACTION_TO_PERFORM">
                 <select-extra-action-to-perform-step [step]="game.currentStep"></select-extra-action-to-perform-step>
             </div>
+            <div *ngSwitchDefault>
+                Unknown step
+            </div>
         </div>
-        <ng-template #gameOver>
-            The game is over.<br/>
-            <br/>
-            Winner(s): <strong *ngFor="let hero of game.getWinners()">{{hero.name}} </strong>
-        </ng-template>
     </div>
+    <ng-template #gameOver>
+        <div class="card-header">The game is over.</div>
+        <div class="card-body">
+            Winner(s): <strong *ngFor="let hero of game.getWinners()">{{hero.name}} </strong>
+        </div>
+    </ng-template>
 </div>

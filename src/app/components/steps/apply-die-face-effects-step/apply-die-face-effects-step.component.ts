@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {ApplyDieFaceEffectsStep} from "../../../model/steps/apply-die-face-effects-step";
+import {configuration} from "../../../app.config";
 
 @Component({
     selector: 'apply-die-face-effects-step',
@@ -9,4 +10,8 @@ import {ApplyDieFaceEffectsStep} from "../../../model/steps/apply-die-face-effec
 export class ApplyDieFaceEffectsStepComponent {
 
     @Input() step: ApplyDieFaceEffectsStep;
+
+    get imageFolder() {
+        return configuration.imageFolder;
+    }
 }

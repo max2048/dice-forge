@@ -1,20 +1,23 @@
 <div class="step-block">
     <div *ngIf="!step.isDone; else effectApplied">
-        {{step.hero.name}} has not applied the effects of this die face yet.
         <div *ngIf="step.dieFace.type == 0">
             <die-face-detail [dieFace]="step.dieFace"></die-face-detail>
-            <button (click)="step.applyAllDieFaceResources()">Take all resource(s)</button>
+            <button class="btn btn-outline-secondary btn-resource" (click)="step.applyAllDieFaceResources()">
+                <span *ngIf="step.dieFace.goldNuggetsQuantity > 0">{{step.dieFace.goldNuggetsQuantity}} <img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/></span>
+                <span *ngIf="step.dieFace.sunShardsQuantity > 0">{{step.dieFace.sunShardsQuantity}} <img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/></span>
+                <span *ngIf="step.dieFace.moonShardsQuantity > 0">{{step.dieFace.moonShardsQuantity}} <img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/></span>
+                <span *ngIf="step.dieFace.gloryPointsQuantity > 0">{{step.dieFace.gloryPointsQuantity}} <img class="resource" [src]="imageFolder + 'resources/glory-point.png'"/></span>
+            </button>
         </div>
         <div *ngIf="step.dieFace.type == 1">
             <die-face-detail [dieFace]="step.dieFace"></die-face-detail>
-            <button *ngIf="step.dieFace.goldNuggetsQuantity > 0" (click)="step.takeGoldNuggets()">Take the {{step.dieFace.goldNuggetsQuantity}} gold nuggets</button>
-            <button *ngIf="step.dieFace.sunShardsQuantity > 0" (click)="step.takeSunShards()">Take the {{step.dieFace.sunShardsQuantity}} sun shards</button>
-            <button *ngIf="step.dieFace.moonShardsQuantity > 0" (click)="step.takeMoonShards()">Take the {{step.dieFace.moonShardsQuantity}} moon shards</button>
-            <button *ngIf="step.dieFace.gloryPointsQuantity > 0" (click)="step.takeGloryPoints()">Take the {{step.dieFace.gloryPointsQuantity}} glory points</button>
+            <button class="btn btn-outline-secondary btn-resource" *ngIf="step.dieFace.goldNuggetsQuantity > 0" (click)="step.takeGoldNuggets()">{{step.dieFace.goldNuggetsQuantity}} <img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/></button>
+            <button class="btn btn-outline-secondary btn-resource" *ngIf="step.dieFace.sunShardsQuantity > 0" (click)="step.takeSunShards()">{{step.dieFace.sunShardsQuantity}} <img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/></button>
+            <button class="btn btn-outline-secondary btn-resource" *ngIf="step.dieFace.moonShardsQuantity > 0" (click)="step.takeMoonShards()">{{step.dieFace.moonShardsQuantity}} <img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/></button>
+            <button class="btn btn-outline-secondary btn-resource" *ngIf="step.dieFace.gloryPointsQuantity > 0" (click)="step.takeGloryPoints()">{{step.dieFace.gloryPointsQuantity}} <img class="resource" [src]="imageFolder + 'resources/glory-point.png'"/></button>
         </div>
     </div>
     <ng-template #effectApplied>
-        {{step.hero.name}} has applied the effects of this die face.<br/>
         <die-face-detail [dieFace]="step.dieFace"></die-face-detail>
     </ng-template>
 </div>

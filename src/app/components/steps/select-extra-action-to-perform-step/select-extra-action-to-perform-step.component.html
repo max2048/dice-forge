@@ -1,11 +1,8 @@
 <div class="step-block">
-    Step: <strong>Active hero may select an extra action to perform, AT A COST OF 2 SUN SHARDS.</strong><br/>
-    <div *ngIf="!step.isDone; else actionSelected">
-        <button (click)="step.selectMakeOfferingToGods()">Make an offering to the Gods</button>
-        <button (click)="step.selectPerformHeroicFeat()">Perform an Heroic feat</button>
-        <button (click)="step.decline()">Decline & end turn</button>
+    <p>{{step.hero.name}}, you may spend 2 <img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/> and select an extra action to perform.</p>
+    <div *ngIf="!step.isDone">
+        <button class="btn btn-outline-secondary" (click)="step.selectMakeOfferingToGods()">Make an offering to the Gods</button>
+        <button class="btn btn-outline-secondary" (click)="step.selectPerformHeroicFeat()">Perform an Heroic feat</button>
+        <button class="btn btn-outline-secondary" (click)="step.decline()">Decline & end turn</button>
     </div>
-    <ng-template #actionSelected>
-        Active hero has selected an extra action to perform.
-    </ng-template>
 </div>

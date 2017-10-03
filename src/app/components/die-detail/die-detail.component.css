@@ -1,8 +1,14 @@
+.die {
+    display: inline-block;
+    margin: 3px 0;
+    background-color: lightgray;
+}
+
 .die-face-container {
     display: inline-block;
-    border: 2px solid white;
+    border: 2px solid transparent;
 }
 
 .highlight {
-    border-color: red;
+    background-color: #777777;
 }

@@ -1,5 +1,6 @@
 import {Die} from "./die";
 import {DieFace} from "./die-face";
+import {DieFaceType} from "./die-face-type";
 
 export class Inventory {
 

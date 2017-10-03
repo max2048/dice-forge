@@ -6,7 +6,7 @@ export class PerformHeroicFeatStep extends Step {
 
     TYPE = StepType.PERFORM_HEROIC_FEAT;
 
-    constructor(private readonly game: Game,
+    constructor(readonly game: Game,
                 private readonly callbackFunction: () => void) {
         super();
     }

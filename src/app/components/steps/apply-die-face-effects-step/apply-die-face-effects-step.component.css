@@ -1,0 +1,8 @@
+.btn-resource {
+    padding: .3rem .75rem;
+}
+
+.btn-resource .resource {
+    width: 1.65rem;
+    height: 1.65rem;
+}

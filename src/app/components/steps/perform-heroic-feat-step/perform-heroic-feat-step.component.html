@@ -1,4 +1,4 @@
 <div class="step-block">
-    Step: <strong>Active hero performs an Heroic feat</strong><br/>
-    <button (click)="step.todo()">TODO</button>
+    <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
+    <button class="btn btn-outline-secondary" (click)="step.todo()">TODO</button>
 </div>

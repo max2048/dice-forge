@@ -1,4 +1,4 @@
 <div class="step-block">
-    Step: <strong>Active player may call for reinforcements</strong><br/>
-    <button (click)="step.todo()">TODO</button>
+    <p>{{step.game.getActiveHero().name}}, you may call for reinforcements.</p>
+    <button class="btn btn-outline-secondary" (click)="step.todo()">TODO</button>
 </div>

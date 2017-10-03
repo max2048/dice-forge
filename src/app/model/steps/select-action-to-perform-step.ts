@@ -1,11 +1,13 @@
 import {Step} from "./step";
 import {StepType} from "./step-type";
+import {Game} from "../game";
 
 export class SelectActionToPerformStep extends Step {
 
     TYPE = StepType.SELECT_ACTION_TO_PERFORM;
 
-    constructor(private readonly callbackFunction: (nextStep: StepType) => void) {
+    constructor(readonly game: Game,
+                private readonly callbackFunction: (nextStep: StepType) => void) {
         super();
     }
 

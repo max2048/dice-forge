@@ -1,18 +1,17 @@
-<div class="step-block">
-    Step: <strong>All heroes receive divine blessings</strong><br/>
-    <div *ngIf="!step.rollAllHeroesDiceStep.isDone; else allDiceRolled">
-        First, they all roll their dice.<br/>
-        <roll-all-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-all-heroes-dice-step>
-    </div>
-    <ng-template #allDiceRolled>
-        All heroes have rolled their dice.<br/>
-        <div class="row">
-            <div class="col-md-6">
-                <apply-die-face-effects-step [step]="step.applyLightDieFaceEffectsStep"></apply-die-face-effects-step>
-            </div>
-            <div class="col-md-6">
-                <apply-die-face-effects-step [step]="step.applyDarkDieFaceEffectsStep"></apply-die-face-effects-step>
-            </div>
-        </div>
-    </ng-template>
+<div *ngIf="!step.rollAllHeroesDiceStep.isDone; else allDiceRolled">
+    <p>All heroes must roll their dice.</p>
+    <roll-all-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-all-heroes-dice-step>
 </div>
+<ng-template #allDiceRolled>
+    <p>{{step.game.getActiveHero().name}}, please select the resources you want to gain.</p>
+    <div class="row">
+        <div class="col-md-6">
+            <hr/>
+            <apply-die-face-effects-step [step]="step.applyLightDieFaceEffectsStep"></apply-die-face-effects-step>
+        </div>
+        <div class="col-md-6">
+            <hr/>
+            <apply-die-face-effects-step [step]="step.applyDarkDieFaceEffectsStep"></apply-die-face-effects-step>
+        </div>
+    </div>
+</ng-template>

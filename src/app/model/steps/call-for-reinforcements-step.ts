@@ -6,7 +6,8 @@ export class CallForReinforcementsStep extends Step {
 
     TYPE = StepType.CALL_FOR_REINFORCEMENTS;
 
-    constructor(private readonly callbackFunction: () => void) {
+    constructor(readonly game: Game,
+                private readonly callbackFunction: () => void) {
         super();
     }
 

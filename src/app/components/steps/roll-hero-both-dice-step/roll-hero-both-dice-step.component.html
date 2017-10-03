@@ -1,10 +1,8 @@
-<div class="step-block">
-    <div *ngIf="!step.isDone; else bothDiceRolled">
-        {{step.hero.name}} has not rolled both his/her dice yet.<br/>
-    </div>
-    <ng-template #bothDiceRolled>
-        {{step.hero.name}} has rolled both his/her dice.<br/>
-    </ng-template>
-    <roll-single-die-step [step]="step.rollLightDieStep"></roll-single-die-step>
-    <roll-single-die-step [step]="step.rollDarkDieStep"></roll-single-die-step>
+<div *ngIf="!step.isDone; else bothDiceRolled">
+    <p>{{step.hero.name}}, please roll your dice.</p>
 </div>
+<ng-template #bothDiceRolled>
+    <p>{{step.hero.name}} has rolled both dice.</p>
+</ng-template>
+<roll-single-die-step [step]="step.rollLightDieStep"></roll-single-die-step>
+<roll-single-die-step [step]="step.rollDarkDieStep"></roll-single-die-step>

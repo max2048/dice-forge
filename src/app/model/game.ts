@@ -92,13 +92,13 @@ export class Game {
             this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
             this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
         } else {
-            this.currentStep = new CallForReinforcementsStep(this.callForReinforcementsStepEnded);
+            this.currentStep = new CallForReinforcementsStep(this, this.callForReinforcementsStepEnded);
         }
     };
 
     private callForReinforcementsStepEnded = (): void => {
         console.log("Step callForReinforcements has ended.");
-        this.currentStep = new SelectActionToPerformStep(this.selectActionToPerformEnded);
+        this.currentStep = new SelectActionToPerformStep(this, this.selectActionToPerformEnded);
     };
 
     private selectActionToPerformEnded = (nextStep: StepType): void => {

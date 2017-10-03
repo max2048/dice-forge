@@ -1,4 +1,4 @@
-<div class="step-block">
+<div>
     <die-detail [die]="step.die" [highlightTopFace]="step.isDone"></die-detail>
-    <button *ngIf="!step.isDone" (click)="step.rollDie()">Roll die</button>
+    <button class="btn btn-outline-secondary" *ngIf="!step.isDone" (click)="step.rollDie()">Roll die</button>
 </div>

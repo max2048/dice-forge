@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {SelectExtraActionToPerformStep} from "../../../model/steps/select-extra-action-to-perform-step";
+import {configuration} from "../../../app.config";
 
 @Component({
     selector: 'select-extra-action-to-perform-step',
@@ -9,4 +10,8 @@ import {SelectExtraActionToPerformStep} from "../../../model/steps/select-extra-
 export class SelectExtraActionToPerformStepComponent {
 
     @Input() step: SelectExtraActionToPerformStep;
+
+    get imageFolder() {
+        return configuration.imageFolder;
+    }
 }

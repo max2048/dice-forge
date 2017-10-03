@@ -6,7 +6,7 @@ export class SelectExtraActionToPerformStep extends Step {
 
     TYPE = StepType.SELECT_EXTRA_ACTION_TO_PERFORM;
 
-    constructor(private readonly hero:Hero,
+    constructor(readonly hero:Hero,
                 private readonly callbackFunction: (nextStep: StepType) => void) {
         super();
     }
