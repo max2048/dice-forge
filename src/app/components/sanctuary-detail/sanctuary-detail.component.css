@@ -3,9 +3,3 @@
     width: 30px;
     height: 30px;
 }
-
-.disabled {
-    filter: grayscale(100%);
-    opacity: 0.4;
-    cursor: not-allowed;
-}

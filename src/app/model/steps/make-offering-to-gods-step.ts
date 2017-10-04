@@ -7,6 +7,7 @@ export class MakeOfferingToGodsStep extends Step {
 
     TYPE = StepType.MAKE_OFFERING_TO_GODS;
 
+    alreadyBoughtFaces: DieFace[] = [];
     newDieFace: DieFace;
     oldDieFace: DieFace;
 
@@ -18,10 +19,16 @@ export class MakeOfferingToGodsStep extends Step {
     forgeFace = (): void => {
         if (!this.isDone && this.oldDieFace && this.newDieFace) {
             this.game.forge(this.game.getActiveHero(), this.oldDieFace,  this.newDieFace);
-            this.isDone = true;
-            this.callbackFunction();
+            this.alreadyBoughtFaces.push(this.newDieFace);
+            this.newDieFace = null;
+            this.oldDieFace = null;
         } else {
             throw new Error("The offering to the Gods has already been made.")
         }
+    };
+
+    finish = (): void => {
+        this.isDone = true;
+        this.callbackFunction();
     };
 }

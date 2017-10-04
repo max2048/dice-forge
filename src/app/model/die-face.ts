@@ -13,6 +13,16 @@ export class DieFace extends BaseObject {
         super();
     }
 
+    public isSimilarToAny = (dieFaces: DieFace[]): boolean => {
+        return dieFaces.some(dieFace => dieFace.isSimilarTo(this));
+    };
+
+
+    public isSimilarTo = (dieFace: DieFace): boolean => {
+        // Different die faces have different images, no need to check all attributes
+        return dieFace != null && this.imageFile.toUpperCase() == dieFace.imageFile.toUpperCase();
+    };
+
     public toString = () : string => {
         let resources: string[] = [];
         if (this.goldNuggetsQuantity != 0) {

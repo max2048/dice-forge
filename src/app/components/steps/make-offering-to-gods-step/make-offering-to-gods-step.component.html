@@ -1,7 +1,17 @@
 <div class="step-block">
     <div *ngIf="!step.newDieFace; else newDieFaceSelected">
-        <p>{{step.game.getActiveHero().name}}, please select a die face to buy from the sanctuary.</p>
-        <sanctuary-detail [sanctuary]="step.game.sanctuary" [budget]="step.game.getActiveHero().inventory.goldNuggets" [clickCallback]="newDieFaceClicked"></sanctuary-detail>
+        <div *ngIf="step.game.getActiveHero().inventory.goldNuggets >= step.game.sanctuary.getSmallestDieFaceCost(); else tooPoor">
+            <p *ngIf="step.alreadyBoughtFaces.length == 0; else buyAnotherFace">{{step.game.getActiveHero().name}}, please select a die face to buy from the sanctuary.</p>
+            <ng-template #buyAnotherFace>
+                <p>{{step.game.getActiveHero().name}}, you may buy another die face from the sanctuary.</p>
+                <button class="btn btn-outline-secondary mb-3" (click)="step.finish()">No thanks</button>
+            </ng-template>
+            <sanctuary-detail [sanctuary]="step.game.sanctuary" [disableFacesAboveCost]="step.game.getActiveHero().inventory.goldNuggets" [disableFacesSimilarTo]="step.alreadyBoughtFaces" [clickCallback]="newDieFaceClicked"></sanctuary-detail>
+        </div>
+        <ng-template #tooPoor>
+            <p>{{step.game.getActiveHero().name}}, you can't afford any more die face.</p>
+            <button class="btn btn-outline-secondary mb-3" (click)="step.finish()">OK</button>
+        </ng-template>
     </div>
     <ng-template #newDieFaceSelected>
         <p>Please select the die face you want to replace with <die-face-detail [dieFace]="step.newDieFace"></die-face-detail></p>

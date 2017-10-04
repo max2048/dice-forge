@@ -1,1 +1,1 @@
-<img class="die-face" [src]="dieFaceImageFile" />
+<ng-container *ngIf="isCallBackActive(); else noCallback"><img class="die-face" [src]="dieFaceImageFile" [ngClass]="{'disabled': isDisabled(), 'clickable': true}" (click)="clickCallBack(this.dieFace)"/></ng-container><ng-template #noCallback><img class="die-face" [src]="dieFaceImageFile" [ngClass]="{'disabled': isDisabled()}"/></ng-template>
