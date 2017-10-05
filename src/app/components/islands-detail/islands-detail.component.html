@@ -1,0 +1,12 @@
+<div class="card">
+    <div class="card-header">
+        Islands
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3" *ngFor="let portal of game.islands.portals">
+                <portal-detail [portal]="portal" [clickCallback]="clickCallback"></portal-detail>
+            </div>
+        </div>
+    </div>
+</div>

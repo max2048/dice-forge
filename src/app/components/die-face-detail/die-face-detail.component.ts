@@ -10,8 +10,19 @@ import {configuration} from "../../app.config";
 export class DieFaceDetailComponent {
 
     @Input() dieFace: DieFace;
+    @Input() disableIfCostAbove: number;
+    @Input() disableIfSimilarTo: DieFace[];
+    @Input() clickCallback: (dieFace: DieFace) => void;
 
     get dieFaceImageFile() {
         return configuration.imageFolder + this.dieFace.imageFile;
     }
+
+    public isCallbackActive = (): boolean => {
+        return this.clickCallback != null && !this.isDisabled();
+    };
+
+    public isDisabled = (): boolean => {
+        return (this.disableIfCostAbove && this.dieFace.cost > this.disableIfCostAbove) || (this.disableIfSimilarTo && this.dieFace.isSimilarToAny(this.disableIfSimilarTo));
+    };
 }

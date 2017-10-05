@@ -1,22 +1,34 @@
 import {BaseObject} from './base-object';
 import {HeroicFeat} from './heroic-feat';
 import {Hero} from './hero';
+import {Slot} from "./slot";
 
 export class Portal extends BaseObject {
 
-    readonly hero: Hero;
+    hero: Hero;
 
-    constructor(readonly heroicFeats: HeroicFeat[]) {
+    constructor(readonly slots: Slot[]) {
         super();
     }
 
-    isBusy(): boolean {
+    isTaken(): boolean {
         return this.hero != null;
     }
 
-    public toString = () : string => {
+    public findSlotContainingHeroicFeat(heroicFeat: HeroicFeat): Slot {
+        for (let slot of this.slots) {
+            for (let hf of slot.heroicFeats) {
+                if (hf == heroicFeat) {
+                    return slot;
+                }
+            }
+        }
+        return null;
+    };
+
+    public toString = (): string => {
         return `Portal (` +
-            `heroicFeats=[${this.heroicFeats}], ` +
+            `slots=[${this.slots}], ` +
             `hero=[${this.hero}]` +
             `)`;
     };

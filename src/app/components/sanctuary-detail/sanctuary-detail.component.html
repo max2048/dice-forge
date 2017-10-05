@@ -4,17 +4,10 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <ng-container  *ngFor="let pool of sanctuary.pools">
+            <ng-container *ngFor="let pool of sanctuary.pools">
                 <div class="col-md-1 mt-2" *ngIf="pool.dieFaces.length">
-                    <div [ngClass]="{'card-text': true, 'disabled': budget != null && budget < pool.dieFaceCost}">
-                        <div><img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/> {{pool.dieFaceCost}}</div>
-                        <div *ngIf="clickCallback && (!budget || budget >= pool.dieFaceCost); else noClickAllowed">
-                            <die-face-detail *ngFor="let dieFace of pool.dieFaces" [dieFace]="dieFace" (click)="clickCallback(dieFace)"></die-face-detail>
-                        </div>
-                        <ng-template #noClickAllowed>
-                            <die-face-detail *ngFor="let dieFace of pool.dieFaces" [dieFace]="dieFace"></die-face-detail>
-                        </ng-template>
-                    </div>
+                    <div><img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/> {{pool.dieFaceCost}}</div>
+                    <ng-container *ngFor="let dieFace of pool.dieFaces"><die-face-detail [dieFace]="dieFace" [disableIfCostAbove]="disableFacesAboveCost" [disableIfSimilarTo]="disableFacesSimilarTo" [clickCallback]="clickCallback"></die-face-detail></ng-container>
                 </div>
             </ng-container>
         </div>

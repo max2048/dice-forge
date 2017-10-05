@@ -11,11 +11,9 @@ import {DieFace} from "../../model/die-face";
 export class SanctuaryDetailComponent {
 
     @Input() sanctuary: Sanctuary;
-    @Input() budget: number;
+    @Input() disableFacesAboveCost: number;
+    @Input() disableFacesSimilarTo: DieFace[];
     @Input() clickCallback: (dieFace: DieFace) => void;
-
-    constructor() {
-    }
 
     get imageFolder() {
         return configuration.imageFolder;

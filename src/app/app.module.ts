@@ -8,8 +8,10 @@ import {CallForReinforcementsStepComponent} from "./components/steps/call-for-re
 import {DieDetailComponent} from './components/die-detail/die-detail.component';
 import {DieFaceDetailComponent} from './components/die-face-detail/die-face-detail.component';
 import {HeroListComponent} from './components/hero-list/hero-list.component';
+import {IslandsDetailComponent} from "./components/islands-detail/islands-detail.component";
 import {MakeOfferingToGodsStepComponent} from "./components/steps/make-offering-to-gods-step/make-offering-to-gods-step.component";
 import {PerformHeroicFeatStepComponent} from "./components/steps/perform-heroic-feat-step/perform-heroic-feat-step.component";
+import {PortalDetailComponent} from "./components/portal-detail/portal-detail.component";
 import {ReceiveDivineBlessingsStepComponent} from "./components/steps/receive-divine-blessings-step/receive-divine-blessings-step.component";
 import {RollAllHeroesDiceStepComponent} from "./components/steps/roll-all-heroes-dice-step/roll-all-heroes-dice-step.component";
 import {RollHeroBothDiceStepComponent} from "./components/steps/roll-hero-both-dice-step/roll-hero-both-dice-step.component";
@@ -17,8 +19,9 @@ import {RollSingleDieStepComponent} from "./components/steps/roll-single-die-ste
 import {RoundDetailComponent} from './components/round-detail/round-detail.component';
 import {SanctuaryDetailComponent} from "./components/sanctuary-detail/sanctuary-detail.component";
 import {SelectActionToPerformStepComponent} from "./components/steps/select-action-to-perform-step/select-action-to-perform-step.component";
-import {TimesPipe} from "./pipes/times.pipe";
 import {SelectExtraActionToPerformStepComponent} from "./components/steps/select-extra-action-to-perform-step/select-extra-action-to-perform-step.component";
+import {TimesPipe} from "./pipes/times.pipe";
+import {HeroicFeatDetailComponent} from "./components/heroic-feat-detail/heroic-feat-detail.component";
 
 @NgModule({
     declarations: [
@@ -27,9 +30,12 @@ import {SelectExtraActionToPerformStepComponent} from "./components/steps/select
         CallForReinforcementsStepComponent,
         DieDetailComponent,
         DieFaceDetailComponent,
+        HeroicFeatDetailComponent,
         HeroListComponent,
+        IslandsDetailComponent,
         MakeOfferingToGodsStepComponent,
         PerformHeroicFeatStepComponent,
+        PortalDetailComponent,
         ReceiveDivineBlessingsStepComponent,
         RollAllHeroesDiceStepComponent,
         RollAllHeroesDiceStepComponent,

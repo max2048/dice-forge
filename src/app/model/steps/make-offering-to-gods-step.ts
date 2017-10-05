@@ -7,6 +7,7 @@ export class MakeOfferingToGodsStep extends Step {
 
     TYPE = StepType.MAKE_OFFERING_TO_GODS;
 
+    alreadyBoughtFaces: DieFace[] = [];
     newDieFace: DieFace;
     oldDieFace: DieFace;
 
@@ -16,12 +17,23 @@ export class MakeOfferingToGodsStep extends Step {
     }
 
     forgeFace = (): void => {
-        if (!this.isDone && this.oldDieFace && this.newDieFace) {
-            this.game.forge(this.game.getActiveHero(), this.oldDieFace,  this.newDieFace);
-            this.isDone = true;
-            this.callbackFunction();
-        } else {
-            throw new Error("The offering to the Gods has already been made.")
+        if (this.isDone) {
+            throw new Error("The offering to the Gods has already been made.");
         }
+        if (!this.oldDieFace || !this.newDieFace) {
+            throw new Error("Hero needs to select a new die face and the old die face to replace.");
+        }
+        if (this.newDieFace.isSimilarToAny(this.alreadyBoughtFaces)) {
+            throw new Error("Hero may not buy two identical die faces from the sanctuary in the same turn.");
+        }
+        this.game.forge(this.game.getActiveHero(), this.oldDieFace, this.newDieFace);
+        this.alreadyBoughtFaces.push(this.newDieFace);
+        this.newDieFace = null;
+        this.oldDieFace = null;
+    };
+
+    finish = (): void => {
+        this.isDone = true;
+        this.callbackFunction();
     };
 }

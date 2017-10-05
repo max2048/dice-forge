@@ -1,7 +1,6 @@
 .die {
     display: inline-block;
     margin: 3px 0;
-    background-color: lightgray;
 }
 
 .die-face-container {

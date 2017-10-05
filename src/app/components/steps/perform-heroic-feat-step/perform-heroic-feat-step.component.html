@@ -1,4 +1,5 @@
 <div class="step-block">
     <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
-    <button class="btn btn-outline-secondary" (click)="step.todo()">TODO</button>
+
+    <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked"></islands-detail>
 </div>

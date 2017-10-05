@@ -1,5 +1,7 @@
 import {BaseObject} from './base-object';
-import {HeroicFeatTypeEffect} from './heroic-feat-type-effect';
+import {HeroicFeatEffectType} from './heroic-feat-effect-type';
+import {Step} from "./steps/step";
+import {Game} from "./game";
 
 export abstract class HeroicFeat extends BaseObject {
 
@@ -8,13 +10,14 @@ export abstract class HeroicFeat extends BaseObject {
     abstract moonShardsCost: number;
     abstract gloryPoints: number;
     abstract imageFile: string;
-    abstract heroFeatTypeEffect: HeroicFeatTypeEffect;
+    abstract effectType: HeroicFeatEffectType;
+    step: Step;
 
     constructor() {
         super();
     }
 
-    abstract activeEffect() : void;
+    abstract initEffect = (game: Game, callbackFunction: () => void): void => {};
 
     public toString = () : string => {
         return `HeroicFeat (` +
@@ -23,8 +26,8 @@ export abstract class HeroicFeat extends BaseObject {
             `sunShardsCost=[${this.sunShardsCost}], ` +
             `moonShardsCost=[${this.moonShardsCost}], ` +
             `gloryPoints=[${this.gloryPoints}], ` +
-            `imageFile=[${this.imageFile}]` +
-            `heroFeatTypeEffect=[${HeroicFeatTypeEffect[this.heroFeatTypeEffect]}]` +
+            `imageFile=[${this.imageFile}], ` +
+            `effectType=[${HeroicFeatEffectType[this.effectType]}]` +
             `)`;
     };
 }

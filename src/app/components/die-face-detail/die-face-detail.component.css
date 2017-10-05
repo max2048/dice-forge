@@ -2,13 +2,15 @@
     display: inline-block;
     width: 42px;
     height: 42px;
-    border: 2px solid transparent;
 }
 
-.die-face:hover {
-    border: none;
+.die-face.clickable:hover  {
+    border: 2px solid #777777;
+    cursor: pointer;
 }
 
-:host-context(.disabled) .die-face:hover {
-    border: 2px solid transparent !important;
+.disabled {
+    filter: grayscale(100%);
+    opacity: 0.4;
+    cursor: not-allowed;
 }
