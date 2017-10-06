@@ -17,7 +17,7 @@ export class Hf02 extends HeroicFeat {
 
     initEffect = (game: Game,  callbackFunction: () => void): void => {
         console.log(game.getActiveHero().name + " gains 3 golds nuggets and 3 moon shards.");
-        game.getActiveHero().inventory.addGoldNuggets(3);
+        game.getActiveHero().inventory.addGoldNuggets(-3);
         game.getActiveHero().inventory.addMoonShards(3);
         callbackFunction();
     };
