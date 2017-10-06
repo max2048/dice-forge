@@ -9,5 +9,6 @@ export enum StepType {
     ROLL_ALL_HEROES_DICE = 7,
     ROLL_HERO_BOTH_DICE = 8,
     ROLL_SINGLE_DIE = 9,
-    APPLY_DIE_FACE_EFFECTS = 10
+    APPLY_DIE_FACE_EFFECTS = 10,
+    DONE = 11
 }

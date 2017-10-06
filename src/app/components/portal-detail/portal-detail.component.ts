@@ -12,6 +12,8 @@ export class PortalDetailComponent {
 
     @Input() portal: Portal;
     @Input() clickCallback: (heroicFeat: HeroicFeat) => void;
+    @Input() disableSlotIfSunShardCostAbove: number;
+    @Input() disableSlotIfMoonShardCostAbove: number;
 
     get imageFolder() {
         return configuration.imageFolder;

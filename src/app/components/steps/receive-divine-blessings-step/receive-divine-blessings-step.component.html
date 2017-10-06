@@ -3,7 +3,7 @@
     <roll-all-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-all-heroes-dice-step>
 </div>
 <ng-template #allDiceRolled>
-    <p>{{step.game.getActiveHero().name}}, please select the resources you want to gain.</p>
+    <p>{{step.getCurrentHero().name}}, please select the resources you want to gain.</p>
     <div class="row">
         <div class="col-md-6">
             <hr/>

@@ -12,6 +12,8 @@ export class IslandsDetailComponent {
 
     @Input() game: Game;
     @Input() clickCallback: (heroicFeat: HeroicFeat) => void;
+    @Input() disableSlotIfSunShardCostAbove: number;
+    @Input() disableSlotIfMoonShardCostAbove: number;
 
     get imageFolder() {
         return configuration.imageFolder;

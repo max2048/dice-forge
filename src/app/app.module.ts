@@ -22,6 +22,7 @@ import {SelectActionToPerformStepComponent} from "./components/steps/select-acti
 import {SelectExtraActionToPerformStepComponent} from "./components/steps/select-extra-action-to-perform-step/select-extra-action-to-perform-step.component";
 import {TimesPipe} from "./pipes/times.pipe";
 import {HeroicFeatDetailComponent} from "./components/heroic-feat-detail/heroic-feat-detail.component";
+import {SlotDetailComponent} from "./components/slot-detail/slot-detail.component";
 
 @NgModule({
     declarations: [
@@ -45,6 +46,7 @@ import {HeroicFeatDetailComponent} from "./components/heroic-feat-detail/heroic-
         SanctuaryDetailComponent,
         SelectActionToPerformStepComponent,
         SelectExtraActionToPerformStepComponent,
+        SlotDetailComponent,
         TimesPipe
     ],
     imports: [
