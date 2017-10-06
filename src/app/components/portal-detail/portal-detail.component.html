@@ -5,14 +5,7 @@
     <div class="card-body">
         <div class="row">
             <div *ngFor="let slot of portal.slots" class="col-md-6">
-                <div *ngIf="slot.heroicFeats.length > 0" (click)="clickCallback(slot.heroicFeats[0])">
-                    <strong>{{slot.heroicFeats[0].name}}</strong> (x{{slot.heroicFeats.length}})
-                    <div>
-                        <span *ngIf="slot.heroicFeats[0].sunShardsCost > 0"><img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/> {{slot.heroicFeats[0].sunShardsCost}}</span>
-                        <span *ngIf="slot.heroicFeats[0].moonShardsCost > 0"><img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/> {{slot.heroicFeats[0].moonShardsCost}}</span>
-                    </div>
-                    <img class="heroic-feat" [src]="imageFolder + slot.heroicFeats[0].imageFile" />
-                </div>
+                <slot-detail [slot]="slot" [clickCallback]="clickCallback" [disableIfSunShardCostAbove]="disableSlotIfSunShardCostAbove" [disableIfMoonShardCostAbove]="disableSlotIfMoonShardCostAbove"></slot-detail>
             </div>
         </div>
     </div>

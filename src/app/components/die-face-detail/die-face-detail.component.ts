@@ -23,6 +23,6 @@ export class DieFaceDetailComponent {
     };
 
     public isDisabled = (): boolean => {
-        return (this.disableIfCostAbove && this.dieFace.cost > this.disableIfCostAbove) || (this.disableIfSimilarTo && this.dieFace.isSimilarToAny(this.disableIfSimilarTo));
+        return (this.disableIfCostAbove != null && this.dieFace.cost > this.disableIfCostAbove) || (this.disableIfSimilarTo != null && this.dieFace.isSimilarToAny(this.disableIfSimilarTo));
     };
 }

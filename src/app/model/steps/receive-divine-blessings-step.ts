@@ -4,6 +4,8 @@ import {Game} from "../game";
 import {Hero} from "../hero";
 import {RollAllHeroesDiceStep} from "./roll-all-heroes-dice-step";
 import {ApplyDieFaceEffectsStep} from "./apply-die-face-effects-step";
+import {DieFaceType} from "../die-face-type";
+import {DoneStep} from "./done-step";
 
 // All heroes roll their dice.
 // Then each hero successively applies the effect of his/her dice.
@@ -13,8 +15,8 @@ export class ReceiveDivineBlessingsStep extends Step {
 
     rollAllHeroesDiceStep: RollAllHeroesDiceStep;
     currentHeroIndex: number;
-    applyLightDieFaceEffectsStep: ApplyDieFaceEffectsStep;
-    applyDarkDieFaceEffectsStep: ApplyDieFaceEffectsStep;
+    applyLightDieFaceEffectsStep: ApplyDieFaceEffectsStep | DoneStep;
+    applyDarkDieFaceEffectsStep: ApplyDieFaceEffectsStep | DoneStep;
 
     constructor(readonly game: Game,
                 private readonly callbackFunction: () => void) {
@@ -30,8 +32,26 @@ export class ReceiveDivineBlessingsStep extends Step {
 
     private currentHeroAppliesDiceEffects = (): void => {
         let currentHero = this.getCurrentHero();
-        this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.lightDie.lastRolledFace, currentHero, this.applyLightDieFaceEffectsStepEnded);
-        this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.darkDie.lastRolledFace, currentHero, this.applyDarkDieFaceEffectsStepEnded);
+        if (currentHero.inventory.lightDie.lastRolledFace.type == DieFaceType.GAIN_ALL_RESOURCES) {
+            currentHero.inventory.addGoldNuggets(currentHero.inventory.lightDie.lastRolledFace.goldNuggetsQuantity);
+            currentHero.inventory.addSunShards(currentHero.inventory.lightDie.lastRolledFace.sunShardsQuantity);
+            currentHero.inventory.addMoonShards(currentHero.inventory.lightDie.lastRolledFace.moonShardsQuantity);
+            currentHero.inventory.addGloryPoints(currentHero.inventory.lightDie.lastRolledFace.gloryPointsQuantity);
+            this.applyLightDieFaceEffectsStep = new DoneStep();
+            this.applyLightDieFaceEffectsStepEnded();
+        } else {
+            this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.lightDie.lastRolledFace, currentHero, this.applyLightDieFaceEffectsStepEnded);
+        }
+        if (currentHero.inventory.darkDie.lastRolledFace.type == DieFaceType.GAIN_ALL_RESOURCES) {
+            currentHero.inventory.addGoldNuggets(currentHero.inventory.darkDie.lastRolledFace.goldNuggetsQuantity);
+            currentHero.inventory.addSunShards(currentHero.inventory.darkDie.lastRolledFace.sunShardsQuantity);
+            currentHero.inventory.addMoonShards(currentHero.inventory.darkDie.lastRolledFace.moonShardsQuantity);
+            currentHero.inventory.addGloryPoints(currentHero.inventory.darkDie.lastRolledFace.gloryPointsQuantity);
+            this.applyDarkDieFaceEffectsStep = new DoneStep();
+            this.applyDarkDieFaceEffectsStepEnded();
+        } else {
+            this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.darkDie.lastRolledFace, currentHero, this.applyDarkDieFaceEffectsStepEnded);
+        }
     };
 
     private applyLightDieFaceEffectsStepEnded = (): void => {
@@ -45,7 +65,9 @@ export class ReceiveDivineBlessingsStep extends Step {
     };
 
     private checkCurrentHeroHasAppliedBothDiceEffects = (): void => {
-        if (this.applyLightDieFaceEffectsStep.isDone && this.applyDarkDieFaceEffectsStep.isDone) {
+        if (this.applyLightDieFaceEffectsStep && this.applyLightDieFaceEffectsStep.isDone && this.applyDarkDieFaceEffectsStep && this.applyDarkDieFaceEffectsStep.isDone) {
+            this.applyLightDieFaceEffectsStep = null;
+            this.applyDarkDieFaceEffectsStep = null;
             this.nextHero();
 
             // If we're back to the active hero, then we're done with the divine blessings

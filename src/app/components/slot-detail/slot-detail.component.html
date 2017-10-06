@@ -1,0 +1,8 @@
+<div *ngIf="slot.heroicFeats.length > 0" (click)="isCallbackActive() ? clickCallback(slot.heroicFeats[0]) : null" [ngClass]="{'slot': true, 'disabled': isDisabled(), 'clickable': isCallbackActive()}">
+    <div>
+        <span *ngIf="slot.heroicFeats[0].sunShardsCost > 0"><img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/> {{slot.heroicFeats[0].sunShardsCost}}</span>
+        <span *ngIf="slot.heroicFeats[0].moonShardsCost > 0"><img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/> {{slot.heroicFeats[0].moonShardsCost}}</span>
+    </div>
+    <p><strong>{{slot.heroicFeats[0].name}}</strong> (x{{slot.heroicFeats.length}})</p>
+    <img class="heroic-feat" [src]="imageFolder + slot.heroicFeats[0].imageFile" />
+</div>

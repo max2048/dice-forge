@@ -1,10 +1,5 @@
 <div class="die">
     <div *ngFor="let dieFace of die.faces" [ngClass]="{'die-face-container': true, 'highlight': highlightTopFace && (die.lastRolledFace && die.lastRolledFace.id == dieFace.id)}">
-        <div *ngIf="clickCallback; else clickCallbackUndefined">
-            <die-face-detail [dieFace]="dieFace" (click)="clickCallback(dieFace)"></die-face-detail>
-        </div>
-        <ng-template #clickCallbackUndefined>
-            <die-face-detail [dieFace]="dieFace"></die-face-detail>
-        </ng-template>
+        <die-face-detail [dieFace]="dieFace" [clickCallback]="clickCallback"></die-face-detail>
     </div>
 </div>

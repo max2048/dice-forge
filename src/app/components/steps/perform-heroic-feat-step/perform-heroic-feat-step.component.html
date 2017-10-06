@@ -1,5 +1,5 @@
 <div class="step-block">
     <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
 
-    <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked"></islands-detail>
+    <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked" [disableSlotIfSunShardCostAbove]="step.game.getActiveHero().inventory.sunShards" [disableSlotIfMoonShardCostAbove]="step.game.getActiveHero().inventory.moonShards"></islands-detail>
 </div>

@@ -1,0 +1,25 @@
+.slot .heroic-feat {
+    /*height: 100px;*/
+    width: 120px;
+    border-radius: 11px;
+}
+
+.slot.clickable:hover  {
+    cursor: pointer;
+}
+
+.slot.clickable:hover .heroic-feat {
+    border: 2px solid #777777;
+}
+
+.slot.disabled {
+    filter: grayscale(100%);
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.resource {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+}

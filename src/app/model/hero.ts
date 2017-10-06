@@ -22,7 +22,7 @@ export class Hero extends BaseObject {
     public toString = () : string => {
         return `Hero (` +
             `id=[${this.id}], ` +
-            `name=[${this.name}]` +
+            `name=[${this.name}], ` +
             `inventory=[${this.inventory.toString()}]` +
             `)`;
     };

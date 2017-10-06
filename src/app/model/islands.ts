@@ -14,16 +14,16 @@ export class Islands {
         let slot1: Slot;
         let slot2: Slot;
 
-        slot1 = new Slot();
-        slot2 = new Slot();
+        slot1 = new Slot(1, 0);
+        slot2 = new Slot(1, 0);
         for (let i = 0; i < cardsPerStack; i++) {
             slot1.heroicFeats.push(new Hf01());
             slot2.heroicFeats.push(new Hf02());
         }
         this.portals.push(new Portal([slot1, slot2]));
 
-        slot1 = new Slot();
-        slot2 = new Slot();
+        slot1 = new Slot(2, 0);
+        slot2 = new Slot(3, 0);
         for (let i = 0; i < cardsPerStack; i++) {
             slot1.heroicFeats.push(new Hf03());
             slot2.heroicFeats.push(new Hf04());
