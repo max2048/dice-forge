@@ -38,12 +38,14 @@ export class PerformHeroicFeatStep extends Step {
         // Is there a hero to oust ?
         let portal: Portal = this.game.islands.findPortalContainingHeroicFeat(this.selectedHeroicFeat);
         if (!portal) {
-            throw new Error("Cannot find a portal containing the selected heroic feat.")
+            throw new Error("Cannot find a portal containing the selected heroic feat.");
         }
-        if (portal.hero != null) {
+        if (portal.hero != null && portal.hero !== this.game.getActiveHero()) {
             console.log(portal.hero.name + " is ousted and receives a divine blessing.");
             this.oustedHeroDivineBlessingStep = new ReceiveDivineBlessingStep(portal.hero, this.oustedHeroDivineBlessingStepEnded);
             portal.hero = this.game.getActiveHero();
+            // TODO realise divineBlessing and go on
+            this.applyHeroicFeatInstantEffect(); // FIXME should be remove
         }
         else {
             portal.hero = this.game.getActiveHero();
@@ -70,9 +72,11 @@ export class PerformHeroicFeatStep extends Step {
     };
 
     private takeCardAndEndStep = (): void => {
-        // FIXME put the card in the hero inventory & remove it from the islands
+        this.game.getActiveHero().inventory.addHeroicFeatCard(this.selectedHeroicFeat);
+        this.game.islands.removeHeroicFeatFromPortal(this.selectedHeroicFeat);
 
         console.log(this.game.getActiveHero().name + " has performed a heroic feat.");
+        console.log(`${this.game.getActiveHero().name} heroic feats list : ${this.game.getActiveHero().inventory.listHeroicFeatCards()}`);
         this.isDone = true;
         this.callbackFunction();
     };

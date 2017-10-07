@@ -26,6 +26,14 @@ export class Portal extends BaseObject {
         return null;
     };
 
+    public removeHeroicFeat(heroicFeat: HeroicFeat): void {
+        let slot = this.findSlotContainingHeroicFeat(heroicFeat);
+        if(!slot) {
+            throw new Error("Cannot find a slot containing the selected heroic feat.");
+        }
+        slot.heroicFeats = slot.heroicFeats.filter(hf => hf.id !== heroicFeat.id);
+    }
+
     public toString = (): string => {
         return `Portal (` +
             `slots=[${this.slots}], ` +

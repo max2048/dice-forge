@@ -43,6 +43,9 @@ export class Game {
                 this.DIE_FACES_PER_POOL = 4;
                 this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = false;
                 this.heroes[2].inventory.goldNuggets = 1;
+                this.heroes[0].inventory.sunShards = 6; // REMOVE ME
+                this.heroes[1].inventory.sunShards = 6; // REMOVE ME
+                this.heroes[2].inventory.sunShards = 6; // REMOVE ME
                 break;
             case 4:
                 this.ROUNDS = 9;

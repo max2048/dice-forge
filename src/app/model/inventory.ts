@@ -1,5 +1,7 @@
 import {Die} from "./die";
 import {DieFace} from "./die-face";
+import {HeroicFeat} from "./heroic-feat";
+import {HeroicFeatEffectType} from "./heroic-feat-effect-type";
 
 export class Inventory {
 
@@ -20,6 +22,8 @@ export class Inventory {
 
     lightDie: Die = new Die();
     darkDie: Die = new Die();
+
+    heroicFeatCards: HeroicFeat[] = [];
 
     constructor() {
         this.lightDie.addFace(new DieFace(0, 0, 1, 0, 0, "die-faces/df06.png"));
@@ -111,6 +115,18 @@ export class Inventory {
     public addBlacksmithChest = () : void => {
         this.blacksmithChests++;
     };
+
+    public addHeroicFeatCard(hf: HeroicFeat): void {
+        this.heroicFeatCards.push(hf);
+    }
+
+    public getReinforcementHeroicFeatCards(): HeroicFeat[] {
+        return this.heroicFeatCards.filter(hf => hf.effectType === HeroicFeatEffectType.REINFORCEMENT);
+    }
+
+    public listHeroicFeatCards(): string {
+        return this.heroicFeatCards.map(hf => hf.name).join(", ");
+    }
 
     public toString = () : string => {
         return `Inventory (` +

@@ -40,6 +40,14 @@ export class Islands {
         return null;
     };
 
+    public removeHeroicFeatFromPortal(heroicFeat: HeroicFeat): void {
+        let portal = this.findPortalContainingHeroicFeat(heroicFeat);
+        if(!portal) {
+            throw new Error("Cannot find a portal containing the selected heroic feat.");
+        }
+        portal.removeHeroicFeat(heroicFeat);
+    }
+
     public toString = (): string => {
         return `Islands (` +
             `portals=[${this.portals}]` +

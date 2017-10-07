@@ -5,7 +5,7 @@ export class Slot extends BaseObject {
 
     constructor(readonly sunShardsCost: number = 0,
                 readonly moonShardsCost: number = 0,
-                readonly heroicFeats: HeroicFeat[] = []) {
+                public heroicFeats: HeroicFeat[] = []) {
         super();
     }
 
