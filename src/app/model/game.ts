@@ -94,8 +94,10 @@ export class Game {
         if (this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN && !this.divineBlessingsStepAlreadyPerformedTwiceThisTurn) {
             this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
             this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
-        } else {
+        } else if (this.getActiveHero().inventory.getReinforcementHeroicFeatCards().length > 0) {
             this.currentStep = new CallForReinforcementsStep(this, this.callForReinforcementsStepEnded);
+        } else {
+            this.currentStep = new SelectActionToPerformStep(this, this.selectActionToPerformEnded);
         }
     };
 

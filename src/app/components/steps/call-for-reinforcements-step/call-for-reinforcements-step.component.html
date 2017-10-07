@@ -1,4 +1,11 @@
 <div class="step-block">
     <p>{{step.game.getActiveHero().name}}, you may call for reinforcements.</p>
-    <button class="btn btn-outline-secondary" (click)="step.todo()">TODO</button>
+    <div class="row reinforcement-heroic-feats">
+        <div class="col-md-3" *ngFor="let heroicFeat of step.game.getActiveHero().inventory.getReinforcementHeroicFeatCards()">
+            <p><strong>{{heroicFeat.name}}</strong></p>
+            <img class="heroic-feat" [src]="imageFolder + heroicFeat.imageFile" />
+            <button class="btn btn-outline-secondary">Apply reinforcement</button>
+        </div>
+    </div>
+    <button class="btn btn-outline-secondary" (click)="step.todo()">I'm done</button>
 </div>

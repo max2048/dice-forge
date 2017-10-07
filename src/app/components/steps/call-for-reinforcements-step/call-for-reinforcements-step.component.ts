@@ -1,5 +1,6 @@
 import {Component, Input} from '@angular/core';
 import {CallForReinforcementsStep} from "../../../model/steps/call-for-reinforcements-step";
+import {configuration} from "../../../app.config";
 
 @Component({
     selector: 'call-for-reinforcements-step',
@@ -9,4 +10,8 @@ import {CallForReinforcementsStep} from "../../../model/steps/call-for-reinforce
 export class CallForReinforcementsStepComponent {
 
     @Input() step: CallForReinforcementsStep;
+
+    get imageFolder() {
+        return configuration.imageFolder;
+    }
 }
