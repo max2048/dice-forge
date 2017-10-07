@@ -1,2 +1,15 @@
 /* You can add global styles to this file, and also import other style files */
 @import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+
+/* Override Bootstrap disabled button style */
+.btn-outline-secondary:disabled {
+    color: #aab6bf;
+    border-color: #aab6bf;
+    background-color: transparent;
+    cursor: not-allowed;
+}
+.btn-outline-secondary:disabled:hover {
+    color: #aab6bf;
+    border-color: #aab6bf;
+    background-color: transparent;
+}

@@ -1,11 +1,19 @@
 <div class="step-block">
-    <p>{{step.game.getActiveHero().name}}, you may call for reinforcements.</p>
-    <div class="row reinforcement-heroic-feats">
-        <div class="col-md-3" *ngFor="let heroicFeat of step.game.getActiveHero().inventory.getReinforcementHeroicFeatCards()">
-            <p><strong>{{heroicFeat.name}}</strong></p>
-            <img class="heroic-feat" [src]="imageFolder + heroicFeat.imageFile" />
-            <button class="btn btn-outline-secondary">Apply reinforcement</button>
+    <ng-container *ngIf="!step.currentHeroicFeat; else heroicFeatSelected">
+        <p>{{step.game.getActiveHero().name}}, you may call for reinforcements.</p>
+        <div class="row">
+            <ng-container *ngFor="let heroicFeat of step.game.getActiveHero().inventory.getReinforcementHeroicFeats()">
+                <div class="heroic-feat-block col-md-2" [ngClass]="{'disabled': step.isAlreadyApplied(heroicFeat)}">
+                    <p><strong>{{heroicFeat.name}}</strong></p>
+                    <img class="heroic-feat mb-3" [src]="imageFolder + heroicFeat.imageFile" />
+                    <button class="btn btn-outline-secondary" (click)="!step.isAlreadyApplied(heroicFeat) ? step.applyReinforcementEffect(heroicFeat) : null" [disabled]="step.isAlreadyApplied(heroicFeat)">Apply effect</button>
+                </div>
+            </ng-container>
         </div>
-    </div>
-    <button class="btn btn-outline-secondary" (click)="step.todo()">I'm done</button>
+        <hr/>
+        <button class="btn btn-outline-secondary" (click)="step.finish()">I'm done</button>
+    </ng-container>
+    <ng-template #heroicFeatSelected>
+        TODO Heroic feat effect
+    </ng-template>
 </div>

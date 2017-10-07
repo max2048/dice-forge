@@ -44,10 +44,8 @@ export class PerformHeroicFeatStep extends Step {
             console.log(portal.hero.name + " is ousted and receives a divine blessing.");
             this.oustedHeroDivineBlessingStep = new ReceiveDivineBlessingStep(portal.hero, this.oustedHeroDivineBlessingStepEnded);
             portal.hero = this.game.getActiveHero();
-            // TODO realise divineBlessing and go on
-            this.applyHeroicFeatInstantEffect(); // FIXME should be remove
-        }
-        else {
+        } else {
+            this.game.islands.removeHeroFromAnyPortal(this.game.getActiveHero());
             portal.hero = this.game.getActiveHero();
             this.applyHeroicFeatInstantEffect();
         }
@@ -72,12 +70,19 @@ export class PerformHeroicFeatStep extends Step {
     };
 
     private takeCardAndEndStep = (): void => {
-        this.game.getActiveHero().inventory.addHeroicFeatCard(this.selectedHeroicFeat);
         this.game.islands.removeHeroicFeatFromPortal(this.selectedHeroicFeat);
-
+        this.game.getActiveHero().inventory.addHeroicFeat(this.selectedHeroicFeat);
         console.log(this.game.getActiveHero().name + " has performed a heroic feat.");
-        console.log(`${this.game.getActiveHero().name} heroic feats list : ${this.game.getActiveHero().inventory.listHeroicFeatCards()}`);
+        console.log(this.game.getActiveHero().name + " now has these Heroic feats : " + this.game.getActiveHero().inventory.listHeroicFeatsAsString());
         this.isDone = true;
         this.callbackFunction();
     };
+    //
+    // public skipStep = (): void => {
+    //     if (this.selectedHeroicFeat) {
+    //         throw new Error("You can't skip this step anymore since you have selected an Heroic feat.");
+    //     }
+    //     this.isDone = true;
+    //     this.callbackFunction();
+    // };
 }

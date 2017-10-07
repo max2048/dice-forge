@@ -11,6 +11,7 @@ export abstract class HeroicFeat extends BaseObject {
     abstract gloryPoints: number;
     abstract imageFile: string;
     abstract effectType: HeroicFeatEffectType;
+    abstract description: string;
     step: Step;
 
     constructor() {
@@ -27,7 +28,8 @@ export abstract class HeroicFeat extends BaseObject {
             `moonShardsCost=[${this.moonShardsCost}], ` +
             `gloryPoints=[${this.gloryPoints}], ` +
             `imageFile=[${this.imageFile}], ` +
-            `effectType=[${HeroicFeatEffectType[this.effectType]}]` +
+            `effectType=[${HeroicFeatEffectType[this.effectType]}], ` +
+            `description=[${this.description}]` +
             `)`;
     };
 }

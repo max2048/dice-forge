@@ -39,13 +39,10 @@ export class Game {
                 this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = true;
                 break;
             case 3:
-                this.ROUNDS = 2; // FIXME 10
+                this.ROUNDS = 10;
                 this.DIE_FACES_PER_POOL = 4;
                 this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = false;
                 this.heroes[2].inventory.goldNuggets = 1;
-                this.heroes[0].inventory.sunShards = 6; // REMOVE ME
-                this.heroes[1].inventory.sunShards = 6; // REMOVE ME
-                this.heroes[2].inventory.sunShards = 6; // REMOVE ME
                 break;
             case 4:
                 this.ROUNDS = 9;
@@ -72,6 +69,10 @@ export class Game {
         return this.heroes[this.activeHeroIndex];
     };
 
+    public getInactiveHeroes = (): Hero[] => {
+        return this.heroes.filter(hero => hero != this.getActiveHero());
+    };
+
     public isOver = (): boolean => {
         return (this.currentRound > this.ROUNDS);
     };
@@ -94,7 +95,7 @@ export class Game {
         if (this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN && !this.divineBlessingsStepAlreadyPerformedTwiceThisTurn) {
             this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
             this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);
-        } else if (this.getActiveHero().inventory.getReinforcementHeroicFeatCards().length > 0) {
+        } else if (this.getActiveHero().inventory.getReinforcementHeroicFeats().length > 0) {
             this.currentStep = new CallForReinforcementsStep(this, this.callForReinforcementsStepEnded);
         } else {
             this.currentStep = new SelectActionToPerformStep(this, this.selectActionToPerformEnded);
@@ -133,7 +134,7 @@ export class Game {
     private makeOfferingToGodsStepEnded = (): void => {
         console.log("Step makeOfferingToGodsStep has ended.");
         if (this.canActiveHeroAffordExtraAction()) {
-            this.currentStep = new SelectExtraActionToPerformStep(this.getActiveHero(), this.selectExtraActionToPerformEnded);
+            this.currentStep = new SelectExtraActionToPerformStep(this, this.selectExtraActionToPerformEnded);
         } else {
             this.endHeroTurn();
         }
@@ -142,7 +143,7 @@ export class Game {
     private performHeroicFeatStepEnded = (): void => {
         console.log("Step performHeroicFeatStep has ended.");
         if (this.canActiveHeroAffordExtraAction()) {
-            this.currentStep = new SelectExtraActionToPerformStep(this.getActiveHero(), this.selectExtraActionToPerformEnded);
+            this.currentStep = new SelectExtraActionToPerformStep(this, this.selectExtraActionToPerformEnded);
         } else {
             this.endHeroTurn();
         }

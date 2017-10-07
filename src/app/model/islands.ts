@@ -5,6 +5,7 @@ import {Slot} from "./slot";
 import {Hf03} from "./heroic-feats/hf03";
 import {Hf04} from "./heroic-feats/hf04";
 import {HeroicFeat} from "./heroic-feat";
+import {Hero} from "./hero";
 
 export class Islands {
 
@@ -31,7 +32,7 @@ export class Islands {
         this.portals.push(new Portal([slot1, slot2]));
     }
 
-    public findPortalContainingHeroicFeat(heroicFeat: HeroicFeat): Portal {
+    public findPortalContainingHeroicFeat = (heroicFeat: HeroicFeat): Portal => {
         for (let portal of this.portals) {
             if (portal.findSlotContainingHeroicFeat(heroicFeat) != null) {
                 return portal;
@@ -40,13 +41,30 @@ export class Islands {
         return null;
     };
 
-    public removeHeroicFeatFromPortal(heroicFeat: HeroicFeat): void {
+    public containsAffordableHeroicFeats = (sunShards : number, moonShards: number): boolean => {
+        for (let portal of this.portals) {
+            if (portal.containsAffordableHeroicFeats(sunShards, moonShards)) {
+                return true;
+            }
+        }
+        return false;
+    };
+
+    public removeHeroicFeatFromPortal = (heroicFeat: HeroicFeat): void => {
         let portal = this.findPortalContainingHeroicFeat(heroicFeat);
-        if(!portal) {
+        if (!portal) {
             throw new Error("Cannot find a portal containing the selected heroic feat.");
         }
         portal.removeHeroicFeat(heroicFeat);
-    }
+    };
+
+    public removeHeroFromAnyPortal = (hero: Hero): void => {
+        for (let portal of this.portals) {
+            if (portal.hero === hero) {
+                portal.hero = null;
+            }
+        }
+    };
 
     public toString = (): string => {
         return `Islands (` +

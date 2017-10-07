@@ -1,5 +1,15 @@
 <div class="step-block">
-    <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
-
-    <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked" [disableSlotIfSunShardCostAbove]="step.game.getActiveHero().inventory.sunShards" [disableSlotIfMoonShardCostAbove]="step.game.getActiveHero().inventory.moonShards"></islands-detail>
+    <ng-container *ngIf="!step.selectedHeroicFeat; else heroicFeatSelected">
+        <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
+        <!--<button class="btn btn-outline-secondary mb-3" (click)="skip()">Skip</button>-->
+        <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked" [disableSlotIfSunShardCostAbove]="step.game.getActiveHero().inventory.sunShards" [disableSlotIfMoonShardCostAbove]="step.game.getActiveHero().inventory.moonShards"></islands-detail>
+    </ng-container>
+    <ng-template #heroicFeatSelected>
+        <p>{{step.game.getActiveHero().name}}, you have selected <strong>{{step.selectedHeroicFeat.name}}.</strong></p>
+        <ng-container *ngIf="step.oustedHeroDivineBlessingStep">
+            <p>{{step.oustedHeroDivineBlessingStep.hero.name}} receives a divine blessing for being ousted by you.</p>
+            <hr/>
+            <receive-divine-blessing-step [step]="step.oustedHeroDivineBlessingStep"></receive-divine-blessing-step>
+        </ng-container>
+    </ng-template>
 </div>

@@ -1,8 +1,14 @@
-.heroic-feat {
-    width: 120px;
-    border-radius: 11px;
+.heroic-feat-block {
+    text-align: center;
 }
 
-.reinforcement-heroic-feats {
-    margin-bottom: 10px;
+.heroic-feat {
+    width: 120px;
+    border-radius: 14px;
+}
+
+.heroic-feat-block.disabled {
+    filter: grayscale(100%);
+    opacity: 0.4;
+    cursor: not-allowed;
 }

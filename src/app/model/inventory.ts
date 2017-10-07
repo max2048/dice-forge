@@ -23,7 +23,7 @@ export class Inventory {
     lightDie: Die = new Die();
     darkDie: Die = new Die();
 
-    heroicFeatCards: HeroicFeat[] = [];
+    heroicFeats: HeroicFeat[] = [];
 
     constructor() {
         this.lightDie.addFace(new DieFace(0, 0, 1, 0, 0, "die-faces/df06.png"));
@@ -116,16 +116,16 @@ export class Inventory {
         this.blacksmithChests++;
     };
 
-    public addHeroicFeatCard(hf: HeroicFeat): void {
-        this.heroicFeatCards.push(hf);
+    public addHeroicFeat(heroicFeat: HeroicFeat): void {
+        this.heroicFeats.push(heroicFeat);
     }
 
-    public getReinforcementHeroicFeatCards(): HeroicFeat[] {
-        return this.heroicFeatCards.filter(hf => hf.effectType === HeroicFeatEffectType.REINFORCEMENT);
+    public getReinforcementHeroicFeats(): HeroicFeat[] {
+        return this.heroicFeats.filter(hf => hf.effectType === HeroicFeatEffectType.REINFORCEMENT);
     }
 
-    public listHeroicFeatCards(): string {
-        return this.heroicFeatCards.map(hf => hf.name).join(", ");
+    public listHeroicFeatsAsString(): string {
+        return this.heroicFeats.map(hf => hf.name).join(", ");
     }
 
     public toString = () : string => {

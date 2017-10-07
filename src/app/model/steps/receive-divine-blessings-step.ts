@@ -55,12 +55,12 @@ export class ReceiveDivineBlessingsStep extends Step {
     };
 
     private applyLightDieFaceEffectsStepEnded = (): void => {
-        console.log(this.getCurrentHero().name + " has applied the effects from the light die.");
+        console.log(this.getCurrentHero().name + " has applied the effects of the light die.");
         this.checkCurrentHeroHasAppliedBothDiceEffects();
     };
 
     private applyDarkDieFaceEffectsStepEnded = (): void => {
-        console.log(this.getCurrentHero().name + " has applied the effects from the dark die.");
+        console.log(this.getCurrentHero().name + " has applied the effects of the dark die.");
         this.checkCurrentHeroHasAppliedBothDiceEffects();
     };
 

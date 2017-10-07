@@ -30,8 +30,8 @@
                         </div>
                     </td>
                     <td class="align-middle">
-                        <span *ngIf="hero.inventory.heroicFeatCards.length === 0; else elseBlock">No Heroic Feats yet</span>
-                        <ng-template #elseBlock>{{hero.inventory.listHeroicFeatCards()}}</ng-template>
+                        <span *ngIf="hero.inventory.heroicFeats.length === 0; else elseBlock">No Heroic Feats yet</span>
+                        <ng-template #elseBlock>{{hero.inventory.listHeroicFeatsAsString()}}</ng-template>
                     </td>
                 </tr>
             </tbody>

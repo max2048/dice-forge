@@ -1,15 +1,25 @@
 import {Step} from "./step";
 import {StepType} from "./step-type";
-import {Hero} from "../hero";
+import {Game} from "../game";
 
 export class SelectExtraActionToPerformStep extends Step {
 
     TYPE = StepType.SELECT_EXTRA_ACTION_TO_PERFORM;
 
-    constructor(readonly hero:Hero,
+    constructor(readonly game: Game,
                 private readonly callbackFunction: (nextStep: StepType) => void) {
         super();
     }
+
+    public canActiveHeroMakeOfferingToGods = (): boolean => {
+        let activeHeroInventory = this.game.getActiveHero().inventory;
+        return (this.game.sanctuary.getAffordablePools(activeHeroInventory.goldNuggets).length > 0);
+    };
+
+    public canActiveHeroPerformHeroicFeat = (): boolean => {
+        let activeHeroInventory = this.game.getActiveHero().inventory;
+        return this.game.islands.containsAffordableHeroicFeats(activeHeroInventory.sunShards, activeHeroInventory.moonShards);
+    };
 
     public selectMakeOfferingToGods = (): void => {
         this.performExtraAction(StepType.MAKE_OFFERING_TO_GODS);
@@ -19,15 +29,15 @@ export class SelectExtraActionToPerformStep extends Step {
         this.performExtraAction(StepType.PERFORM_HEROIC_FEAT);
     };
 
-    public decline = (): void => {
+    public finish = (): void => {
         this.isDone = true;
         this.callbackFunction(null);
     };
 
     private performExtraAction = (nextStep: StepType): void => {
-        console.log(this.hero.name + " wants to buy an extra action [" + nextStep + "].");
-        if (this.hero.inventory.sunShards >= 2) {
-            this.hero.inventory.addSunShards(-2);
+        console.log(this.game.getActiveHero().name + " wants to buy an extra action [" + nextStep + "].");
+        if (this.game.getActiveHero().inventory.sunShards >= 2) {
+            this.game.getActiveHero().inventory.addSunShards(-2);
             this.isDone = true;
             this.callbackFunction(nextStep);
         } else {

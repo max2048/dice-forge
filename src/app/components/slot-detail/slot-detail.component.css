@@ -1,7 +1,10 @@
+.slot {
+    text-align: center;
+}
+
 .slot .heroic-feat {
-    /*height: 100px;*/
     width: 120px;
-    border-radius: 11px;
+    border-radius: 14px;
 }
 
 .slot.clickable:hover  {

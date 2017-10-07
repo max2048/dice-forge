@@ -26,13 +26,24 @@ export class Portal extends BaseObject {
         return null;
     };
 
-    public removeHeroicFeat(heroicFeat: HeroicFeat): void {
-        let slot = this.findSlotContainingHeroicFeat(heroicFeat);
-        if(!slot) {
-            throw new Error("Cannot find a slot containing the selected heroic feat.");
+    public containsAffordableHeroicFeats = (sunShardsBudget : number, moonShardsBudget: number): boolean => {
+        for (let slot of this.slots) {
+            if (slot.sunShardsCost <= sunShardsBudget && slot.moonShardsCost <= moonShardsBudget && slot.heroicFeats.length > 0) {
+                return true;
+            }
         }
-        slot.heroicFeats = slot.heroicFeats.filter(hf => hf.id !== heroicFeat.id);
-    }
+        return false;
+    };
+
+    public removeHeroicFeat = (heroicFeat: HeroicFeat): boolean => {
+        for (let slot of this.slots) {
+            let heroicFeatIndex: number = slot.heroicFeats.indexOf(heroicFeat);
+            if (heroicFeatIndex >= 0) {
+                return (slot.heroicFeats.splice(heroicFeatIndex, 1) != null);
+            }
+        }
+        return false;
+    };
 
     public toString = (): string => {
         return `Portal (` +

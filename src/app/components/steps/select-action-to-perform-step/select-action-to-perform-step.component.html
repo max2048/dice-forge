@@ -1,8 +1,30 @@
 <div class="step-block">
-    <p>{{step.game.getActiveHero().name}}, please select an action to perform.</p>
     <div *ngIf="!step.isDone">
-        <button class="btn btn-outline-secondary" (click)="step.selectMakeOfferingToGods()">Make an offering to the Gods</button>
-        <button class="btn btn-outline-secondary" (click)="step.selectPerformHeroicFeat()">Perform an Heroic feat</button>
-        <button class="btn btn-outline-secondary" (click)="step.decline()">Decline & end turn</button>
+        <ng-container *ngIf="step.canActiveHeroMakeOfferingToGods() && step.canActiveHeroPerformHeroicFeat(); else notBothActions">
+            <p>{{step.game.getActiveHero().name}}, please select an action to perform.</p>
+        </ng-container>
+        <ng-template #notBothActions>
+            <ng-container *ngIf="step.canActiveHeroMakeOfferingToGods() || step.canActiveHeroPerformHeroicFeat(); else noActionAtAll">
+                <p>{{step.game.getActiveHero().name}}, only one action is currently available to you.</p>
+            </ng-container>
+            <ng-template #noActionAtAll>
+                <p>{{step.game.getActiveHero().name}}, you can't currently afford an action.</p>
+                <button class="btn btn-outline-secondary" (click)="step.finish()">Got it</button>
+            </ng-template>
+        </ng-template>
+
+        <ng-container *ngIf="step.canActiveHeroMakeOfferingToGods(); else cannotAffordOfferingToGods">
+            <button class="btn btn-outline-secondary" (click)="step.selectMakeOfferingToGods()">Make an offering to the Gods</button>
+        </ng-container>
+        <ng-template #cannotAffordOfferingToGods>
+            <button class="btn btn-outline-secondary" disabled>Make an offering to the Gods</button>
+        </ng-template>
+
+        <ng-container *ngIf="step.canActiveHeroPerformHeroicFeat(); else cannotAffordHeroicFeat">
+            <button class="btn btn-outline-secondary" (click)="step.selectPerformHeroicFeat()">Perform an Heroic feat</button>
+        </ng-container>
+        <ng-template #cannotAffordHeroicFeat>
+            <button class="btn btn-outline-secondary" disabled>Perform an Heroic feat</button>
+        </ng-template>
     </div>
 </div>
