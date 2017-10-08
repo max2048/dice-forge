@@ -1,6 +1,7 @@
 import {HeroicFeat} from '../heroic-feat';
 import {HeroicFeatEffectType} from '../heroic-feat-effect-type';
 import {Game} from "../game";
+import {Hf03Step} from "../steps/heroic-feats/hf03-step";
 
 export class Hf03 extends HeroicFeat {
 
@@ -16,9 +17,11 @@ export class Hf03 extends HeroicFeat {
         super();
     }
 
+    isEffectApplicable = (game: Game): boolean => {
+        return true;
+    };
+
     initEffect = (game: Game,  callbackFunction: () => void): void => {
-        // TODO
-        console.log("Init [The Gardian's Owl] effect");
-        callbackFunction();
+        this.step = new Hf03Step(game, callbackFunction);
     };
 }

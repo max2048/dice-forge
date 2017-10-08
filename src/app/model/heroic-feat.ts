@@ -18,6 +18,10 @@ export abstract class HeroicFeat extends BaseObject {
         super();
     }
 
+    abstract isEffectApplicable = (game: Game): boolean => {
+        return true;
+    };
+
     abstract initEffect = (game: Game, callbackFunction: () => void): void => {};
 
     public toString = () : string => {

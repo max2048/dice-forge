@@ -1,0 +1,7 @@
+<ng-container *ngIf="!step.isDone">
+    <p>{{step.game.getActiveHero().name}}, please select the resource you want to gain.</p>
+
+    <button class="btn btn-outline-secondary btn-resource" (click)="step.takeGoldNugget()">1 <img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/></button>
+    <button class="btn btn-outline-secondary btn-resource" (click)="step.takeSunShard()">1 <img class="resource" [src]="imageFolder + 'resources/sun-shard.png'"/></button>
+    <button class="btn btn-outline-secondary btn-resource" (click)="step.takeMoonShard()">1 <img class="resource" [src]="imageFolder + 'resources/moon-shard.png'"/></button>
+</ng-container>

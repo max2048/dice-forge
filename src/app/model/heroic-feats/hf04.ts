@@ -15,6 +15,10 @@ export class Hf04 extends HeroicFeat {
         super();
     }
 
+    isEffectApplicable = (game: Game): boolean => {
+        return true;
+    };
+
     initEffect = (game: Game,  callbackFunction: () => void): void => {
         // TODO
         console.log("Init [Minotaur] effect");

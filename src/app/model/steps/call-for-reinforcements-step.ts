@@ -25,9 +25,7 @@ export class CallForReinforcementsStep extends Step {
             throw new Error("Heroic feat [" + heroicFeat.name + "]'s reinforcement effect has already been applied.");
         }
         this.currentHeroicFeat = heroicFeat;
-        // this.currentHeroicFeat.initEffect(this.game, this.heroicFeatReinforcementEffectApplied);
-        this.currentHeroicFeat.step = new DoneStep();
-        this.heroicFeatReinforcementEffectApplied();
+        this.currentHeroicFeat.initEffect(this.game, this.heroicFeatReinforcementEffectApplied);
     };
 
     private heroicFeatReinforcementEffectApplied = (): void => {

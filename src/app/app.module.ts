@@ -24,6 +24,7 @@ import {TimesPipe} from "./pipes/times.pipe";
 import {HeroicFeatDetailComponent} from "./components/heroic-feat-detail/heroic-feat-detail.component";
 import {SlotDetailComponent} from "./components/slot-detail/slot-detail.component";
 import {ReceiveDivineBlessingStepComponent} from "./components/steps/receive-divine-blessing-step/receive-divine-blessing-step.component";
+import {Hf03StepComponent} from "./components/steps/heroic-feats/hf03-step/hf03-step.component";
 
 @NgModule({
     declarations: [
@@ -34,6 +35,7 @@ import {ReceiveDivineBlessingStepComponent} from "./components/steps/receive-div
         DieFaceDetailComponent,
         HeroicFeatDetailComponent,
         HeroListComponent,
+        Hf03StepComponent,
         IslandsDetailComponent,
         MakeOfferingToGodsStepComponent,
         PerformHeroicFeatStepComponent,

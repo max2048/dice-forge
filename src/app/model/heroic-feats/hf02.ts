@@ -1,6 +1,7 @@
 import {HeroicFeat} from '../heroic-feat';
 import {HeroicFeatEffectType} from '../heroic-feat-effect-type';
 import {Game} from "../game";
+import {DoneStep} from "../steps/done-step";
 
 export class Hf02 extends HeroicFeat {
 
@@ -16,10 +17,15 @@ export class Hf02 extends HeroicFeat {
         super();
     }
 
+    isEffectApplicable = (game: Game): boolean => {
+        return true;
+    };
+
     initEffect = (game: Game,  callbackFunction: () => void): void => {
         console.log(game.getActiveHero().name + " gains 3 gold nuggets and 3 moon shards.");
         game.getActiveHero().inventory.addGoldNuggets(3);
         game.getActiveHero().inventory.addMoonShards(3);
+        this.step = new DoneStep();
         callbackFunction();
     };
 }

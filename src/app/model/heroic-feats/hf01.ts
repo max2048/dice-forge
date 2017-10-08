@@ -1,7 +1,7 @@
 import {HeroicFeat} from '../heroic-feat';
 import {HeroicFeatEffectType} from '../heroic-feat-effect-type';
 import {Game} from "../game";
-import {Hf01Step} from "../steps/heroic-feats/hf01-step";
+import {DoneStep} from "../steps/done-step";
 
 export class Hf01 extends HeroicFeat {
 
@@ -17,7 +17,18 @@ export class Hf01 extends HeroicFeat {
         super();
     }
 
+    isEffectApplicable = (game: Game): boolean => {
+        return game.getActiveHero().inventory.goldNuggets >= 3;
+    };
+
     initEffect = (game: Game,  callbackFunction: () => void): void => {
-        this.step = new Hf01Step(game, callbackFunction);
+        console.log(game.getActiveHero().name + " wants to trade 3 gold nuggets for 4 glory points.");
+        if (!this.isEffectApplicable(game)) {
+            throw new Error(game.getActiveHero().name + " can't afford to spend 3 gold nuggets.");
+        }
+        game.getActiveHero().inventory.addGoldNuggets(-3);
+        game.getActiveHero().inventory.addGloryPoints(4);
+        this.step = new DoneStep();
+        callbackFunction();
     };
 }
