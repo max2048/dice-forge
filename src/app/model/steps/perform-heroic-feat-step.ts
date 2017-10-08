@@ -43,6 +43,7 @@ export class PerformHeroicFeatStep extends Step {
         if (portal.hero != null && portal.hero !== this.game.getActiveHero()) {
             console.log(portal.hero.name + " is ousted and receives a divine blessing.");
             this.oustedHeroDivineBlessingStep = new ReceiveDivineBlessingStep(portal.hero, this.oustedHeroDivineBlessingStepEnded);
+            this.game.islands.removeHeroFromAnyPortal(this.game.getActiveHero());
             portal.hero = this.game.getActiveHero();
         } else {
             this.game.islands.removeHeroFromAnyPortal(this.game.getActiveHero());
