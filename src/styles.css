@@ -13,3 +13,7 @@
     border-color: #aab6bf;
     background-color: transparent;
 }
+
+.dimmed {
+    opacity: 0.4;
+}

@@ -4,7 +4,7 @@
     </div>
     <div class="card-body">
         <div class="row">
-            <div class="col-md-4" *ngFor="let portal of game.islands.portals">
+            <div class="col-md-3" *ngFor="let portal of game.islands.portals">
                 <portal-detail [portal]="portal" [clickCallback]="clickCallback" [disableSlotIfSunShardCostAbove]="disableSlotIfSunShardCostAbove" [disableSlotIfMoonShardCostAbove]="disableSlotIfMoonShardCostAbove"></portal-detail>
             </div>
         </div>

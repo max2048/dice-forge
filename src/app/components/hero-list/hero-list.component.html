@@ -30,8 +30,13 @@
                         </div>
                     </td>
                     <td class="align-middle">
-                        <span *ngIf="hero.inventory.heroicFeats.length === 0; else elseBlock">No Heroic Feats yet</span>
-                        <ng-template #elseBlock>{{hero.inventory.listHeroicFeatsAsString()}}</ng-template>
+                        <ng-container *ngIf="hero.inventory.heroicFeats.length > 0; else noHeroicFeats">
+                            <img *ngFor="let heroicFeat of hero.inventory.heroicFeats" [src]="imageFolder + heroicFeat.imageFile" class="miniature-heroic-feat" [title]="heroicFeat.name + ': ' + heroicFeat.description" />
+                            <!--{{hero.inventory.listHeroicFeatsAsString()}}-->
+                        </ng-container>
+                        <ng-template #noHeroicFeats>
+                            <span class="dimmed">No Heroic Feats yet</span>
+                        </ng-template>
                     </td>
                 </tr>
             </tbody>

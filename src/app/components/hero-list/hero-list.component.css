@@ -10,3 +10,8 @@
 .hero-name {
     padding-left: 1.25em;
 }
+
+.miniature-heroic-feat {
+    width: 60px;
+    margin-right: 5px;
+}
