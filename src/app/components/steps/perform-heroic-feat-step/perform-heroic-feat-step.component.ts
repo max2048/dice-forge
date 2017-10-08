@@ -14,8 +14,4 @@ export class PerformHeroicFeatStepComponent {
     heroicFeatClicked = (clickedHeroicFeat: HeroicFeat): void => {
         this.step.buyHeroicFeat(clickedHeroicFeat);
     };
-    //
-    // skip = (): void => {
-    //     this.step.skipStep();
-    // }
 }

@@ -109,7 +109,7 @@ export class Game {
 
     private selectActionToPerformEnded = (nextStep: StepType): void => {
         console.log("Step selectActionToPerform has ended.");
-        console.log("Action to perform: " + nextStep);
+        console.log("Action to perform: " + StepType[nextStep]);
         switch (nextStep) {
             case null:
                 this.currentStep = null;
@@ -151,7 +151,7 @@ export class Game {
 
     private selectExtraActionToPerformEnded = (nextStep: StepType): void => {
         console.log("Step selectExtraActionToPerform has ended.");
-        console.log("Extra action to perform: " + nextStep);
+        console.log("Extra action to perform: " + StepType[nextStep]);
         switch (nextStep) {
             case null:
                 this.currentStep = null;

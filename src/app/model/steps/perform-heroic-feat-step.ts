@@ -77,12 +77,4 @@ export class PerformHeroicFeatStep extends Step {
         this.isDone = true;
         this.callbackFunction();
     };
-    //
-    // public skipStep = (): void => {
-    //     if (this.selectedHeroicFeat) {
-    //         throw new Error("You can't skip this step anymore since you have selected an Heroic feat.");
-    //     }
-    //     this.isDone = true;
-    //     this.callbackFunction();
-    // };
 }

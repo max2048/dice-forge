@@ -1,7 +1,6 @@
 <div class="step-block">
     <ng-container *ngIf="!step.selectedHeroicFeat; else heroicFeatSelected">
         <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
-        <!--<button class="btn btn-outline-secondary mb-3" (click)="skip()">Skip</button>-->
         <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked" [disableSlotIfSunShardCostAbove]="step.game.getActiveHero().inventory.sunShards" [disableSlotIfMoonShardCostAbove]="step.game.getActiveHero().inventory.moonShards"></islands-detail>
     </ng-container>
     <ng-template #heroicFeatSelected>

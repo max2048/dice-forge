@@ -18,7 +18,8 @@ export class SelectExtraActionToPerformStep extends Step {
 
     public canActiveHeroPerformHeroicFeat = (): boolean => {
         let activeHeroInventory = this.game.getActiveHero().inventory;
-        return this.game.islands.containsAffordableHeroicFeats(activeHeroInventory.sunShards, activeHeroInventory.moonShards);
+        // Need to consider the 2 sun shards that would be spent for getting the extra action
+        return this.game.islands.containsAffordableHeroicFeats(activeHeroInventory.sunShards - 2, activeHeroInventory.moonShards);
     };
 
     public selectMakeOfferingToGods = (): void => {
