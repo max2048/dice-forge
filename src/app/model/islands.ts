@@ -6,6 +6,7 @@ import {Hf03} from "./heroic-feats/hf03";
 import {Hf04} from "./heroic-feats/hf04";
 import {HeroicFeat} from "./heroic-feat";
 import {Hero} from "./hero";
+import {Hf05} from "./heroic-feats/hf05";
 
 export class Islands {
 
@@ -28,6 +29,14 @@ export class Islands {
         for (let i = 0; i < cardsPerStack; i++) {
             slot1.heroicFeats.push(new Hf03());
             slot2.heroicFeats.push(new Hf04());
+        }
+        this.portals.push(new Portal([slot1, slot2]));
+
+        slot1 = new Slot(4, 0);
+        slot2 = new Slot(5, 0);
+        for (let i = 0; i < cardsPerStack; i++) {
+            slot1.heroicFeats.push(new Hf05());
+            //slot2.heroicFeats.push(new Hf06());
         }
         this.portals.push(new Portal([slot1, slot2]));
     }
