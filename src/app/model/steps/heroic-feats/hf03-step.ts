@@ -1,5 +1,4 @@
 import {Step} from "../step";
-import {StepType} from "../step-type";
 import {Game} from "../../game";
 
 export class Hf03Step extends Step {

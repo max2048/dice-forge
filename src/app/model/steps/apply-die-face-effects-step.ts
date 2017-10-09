@@ -2,13 +2,13 @@ import {Step} from "./step";
 import {StepType} from "./step-type";
 import {DieFace} from "../die-face";
 import {Hero} from "../hero";
-import {Game} from "../game";
 
 export class ApplyDieFaceEffectsStep extends Step {
 
     TYPE = StepType.APPLY_DIE_FACE_EFFECTS;
 
     constructor(readonly dieFace: DieFace,
+                readonly multiplier: number,
                 readonly hero: Hero,
                 private readonly callbackFunction: () => void) {
         super();
@@ -44,10 +44,10 @@ export class ApplyDieFaceEffectsStep extends Step {
         if (this.isDone) {
             throw new Error("Effects from this die have already been applied.");
         }
-        this.hero.inventory.addGoldNuggets(goldNuggetsQuantity);
-        this.hero.inventory.addSunShards(sunShardsQuantity);
-        this.hero.inventory.addMoonShards(moonShardsQuantity);
-        this.hero.inventory.addGloryPoints(gloryPointsQuantity);
+        this.hero.inventory.addGoldNuggets(this.multiplier * goldNuggetsQuantity);
+        this.hero.inventory.addSunShards(this.multiplier * sunShardsQuantity);
+        this.hero.inventory.addMoonShards(this.multiplier * moonShardsQuantity);
+        this.hero.inventory.addGloryPoints(this.multiplier * gloryPointsQuantity);
 
         this.isDone = true;
         this.callbackFunction();

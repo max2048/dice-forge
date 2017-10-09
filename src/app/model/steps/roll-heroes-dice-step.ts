@@ -2,17 +2,19 @@ import {Step} from "./step";
 import {StepType} from "./step-type";
 import {Game} from "../game";
 import {RollHeroBothDiceStep} from "./roll-hero-both-dice-step";
+import {Hero} from "../hero";
 
-export class RollAllHeroesDiceStep extends Step {
+export class RollHeroesBothDiceStep extends Step {
 
-    TYPE = StepType.ROLL_ALL_HEROES_DICE;
+    TYPE = StepType.ROLL_HEROES_DICE;
 
     rollHeroBothDiceSteps: RollHeroBothDiceStep[] = [];
 
-    constructor(readonly game: Game,
+    constructor(readonly heroes: Hero[],
+                readonly game: Game,
                 private readonly callbackFunction: () => void) {
         super();
-        for (let hero of game.heroes) {
+        for (let hero of heroes) {
             this.rollHeroBothDiceSteps.push(new RollHeroBothDiceStep(hero, this.rollHeroBothDiceStepEnded));
         }
     }

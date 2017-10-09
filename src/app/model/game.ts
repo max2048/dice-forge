@@ -43,6 +43,9 @@ export class Game {
                 this.DIE_FACES_PER_POOL = 4;
                 this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN = false;
                 this.heroes[2].inventory.goldNuggets = 1;
+                // this.heroes[0].inventory.sunShards = 6; // FIXME For tests only
+                // this.heroes[1].inventory.sunShards = 6; // FIXME For tests only
+                // this.heroes[2].inventory.sunShards = 6; // FIXME For tests only
                 break;
             case 4:
                 this.ROUNDS = 9;
@@ -78,7 +81,7 @@ export class Game {
     };
 
     public getWinners = (): Hero[] => {
-        let maxScore: number = Math.max.apply(Math, this.heroes.map(hero => hero.inventory.gloryPoints));
+        let maxScore: number = Math.max.apply(Math, this.heroes.map(hero => hero.inventory.getTotalGloryPoints()));
         return this.heroes.filter(hero => hero.inventory.gloryPoints == maxScore);
     };
 
@@ -91,7 +94,7 @@ export class Game {
     };
 
     private receiveDivineBlessingsStepEnded = (): void => {
-        console.log("Step allHeroesReceiveDivineBlessings has ended.");
+        console.log("Step receiveDivineBlessings has ended.");
         if (this.PERFORM_DIVINE_BLESSINGS_STEP_TWICE_PER_TURN && !this.divineBlessingsStepAlreadyPerformedTwiceThisTurn) {
             this.divineBlessingsStepAlreadyPerformedTwiceThisTurn = true;
             this.currentStep = new ReceiveDivineBlessingsStep(this, this.receiveDivineBlessingsStepEnded);

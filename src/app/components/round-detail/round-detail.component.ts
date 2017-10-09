@@ -27,8 +27,8 @@ export class RoundDetailComponent {
                 return "Perform an heroic feat";
             case StepType.SELECT_EXTRA_ACTION_TO_PERFORM :
                 return "Select an extra action to perform";
-            case StepType.ROLL_ALL_HEROES_DICE :
-                return "All heroes roll their dice";
+            case StepType.ROLL_HEROES_DICE :
+                return "Some heroes roll their dice";
             case StepType.ROLL_HERO_BOTH_DICE :
                 return "Roll dice";
             case StepType.ROLL_SINGLE_DIE :

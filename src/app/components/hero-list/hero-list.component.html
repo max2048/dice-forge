@@ -10,7 +10,7 @@
                         {{hero.name}}
                     </td>
                     <td class="align-middle text-center">
-                        <img class="resource" [src]="imageFolder + 'resources/glory-point.png'"/> {{hero.inventory.gloryPoints}}
+                        <img class="resource" [src]="imageFolder + 'resources/glory-point.png'"/> {{hero.inventory.gloryPoints}} {{ hero.inventory.getHeroicFeatGloryPoints() > 0 ? ' + ' + hero.inventory.getHeroicFeatGloryPoints() : ''}}
                     </td>
                     <td class="align-middle text-center">
                         <img class="resource" [src]="imageFolder + 'resources/gold-nugget.png'"/> {{hero.inventory.goldNuggets}}/{{hero.inventory.getActualGoldNuggetsLimit()}}
@@ -32,7 +32,6 @@
                     <td class="align-middle">
                         <ng-container *ngIf="hero.inventory.heroicFeats.length > 0; else noHeroicFeats">
                             <img *ngFor="let heroicFeat of hero.inventory.heroicFeats" [src]="imageFolder + heroicFeat.imageFile" class="miniature-heroic-feat" [title]="heroicFeat.name + ': ' + heroicFeat.description" />
-                            <!--{{hero.inventory.listHeroicFeatsAsString()}}-->
                         </ng-container>
                         <ng-template #noHeroicFeats>
                             <span class="dimmed">No Heroic Feats yet</span>

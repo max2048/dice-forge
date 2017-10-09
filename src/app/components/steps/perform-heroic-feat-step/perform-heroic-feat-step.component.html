@@ -1,6 +1,6 @@
 <div class="step-block">
     <ng-container *ngIf="!step.selectedHeroicFeat; else heroicFeatSelected">
-        <p>{{step.game.getActiveHero().name}}, you may perform an Heroic feat.</p>
+        <p>{{step.game.getActiveHero().name}}, please select an Heroic feat to perform.</p>
         <islands-detail [game]="step.game" [clickCallback]="heroicFeatClicked" [disableSlotIfSunShardCostAbove]="step.game.getActiveHero().inventory.sunShards" [disableSlotIfMoonShardCostAbove]="step.game.getActiveHero().inventory.moonShards"></islands-detail>
     </ng-container>
     <ng-template #heroicFeatSelected>
@@ -10,5 +10,7 @@
             <hr/>
             <receive-divine-blessing-step [step]="step.oustedHeroDivineBlessingStep"></receive-divine-blessing-step>
         </ng-container>
+        <!--TODO handle other HFs-->
+        <hf04-step [step]="step.selectedHeroicFeat.step"></hf04-step>
     </ng-template>
 </div>

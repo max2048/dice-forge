@@ -2,10 +2,10 @@ import {Step} from "./step";
 import {StepType} from "./step-type";
 import {Game} from "../game";
 import {Hero} from "../hero";
-import {RollAllHeroesDiceStep} from "./roll-all-heroes-dice-step";
 import {ApplyDieFaceEffectsStep} from "./apply-die-face-effects-step";
 import {DieFaceType} from "../die-face-type";
 import {DoneStep} from "./done-step";
+import {RollHeroesBothDiceStep} from "./roll-heroes-dice-step";
 
 // All heroes roll their dice.
 // Then each hero successively applies the effect of his/her dice.
@@ -13,7 +13,7 @@ export class ReceiveDivineBlessingsStep extends Step {
 
     TYPE = StepType.RECEIVE_DIVINE_BLESSINGS;
 
-    rollAllHeroesDiceStep: RollAllHeroesDiceStep;
+    rollAllHeroesDiceStep: RollHeroesBothDiceStep;
     currentHeroIndex: number;
     applyLightDieFaceEffectsStep: ApplyDieFaceEffectsStep | DoneStep;
     applyDarkDieFaceEffectsStep: ApplyDieFaceEffectsStep | DoneStep;
@@ -21,7 +21,8 @@ export class ReceiveDivineBlessingsStep extends Step {
     constructor(readonly game: Game,
                 private readonly callbackFunction: () => void) {
         super();
-        this.rollAllHeroesDiceStep = new RollAllHeroesDiceStep(game, this.rollAllHeroesDiceStepEnded);
+        // All heroes roll their dice
+        this.rollAllHeroesDiceStep = new RollHeroesBothDiceStep(game.heroes, game, this.rollAllHeroesDiceStepEnded);
     }
 
     private rollAllHeroesDiceStepEnded = (): void => {
@@ -40,7 +41,7 @@ export class ReceiveDivineBlessingsStep extends Step {
             this.applyLightDieFaceEffectsStep = new DoneStep();
             this.applyLightDieFaceEffectsStepEnded();
         } else {
-            this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.lightDie.lastRolledFace, currentHero, this.applyLightDieFaceEffectsStepEnded);
+            this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.lightDie.lastRolledFace, 1, currentHero, this.applyLightDieFaceEffectsStepEnded);
         }
         if (currentHero.inventory.darkDie.lastRolledFace.type == DieFaceType.GAIN_ALL_RESOURCES) {
             currentHero.inventory.addGoldNuggets(currentHero.inventory.darkDie.lastRolledFace.goldNuggetsQuantity);
@@ -50,7 +51,7 @@ export class ReceiveDivineBlessingsStep extends Step {
             this.applyDarkDieFaceEffectsStep = new DoneStep();
             this.applyDarkDieFaceEffectsStepEnded();
         } else {
-            this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.darkDie.lastRolledFace, currentHero, this.applyDarkDieFaceEffectsStepEnded);
+            this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(currentHero.inventory.darkDie.lastRolledFace, 1, currentHero, this.applyDarkDieFaceEffectsStepEnded);
         }
     };
 

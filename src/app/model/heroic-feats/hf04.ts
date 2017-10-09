@@ -1,6 +1,7 @@
 import {HeroicFeat} from '../heroic-feat';
 import {HeroicFeatEffectType} from '../heroic-feat-effect-type';
 import {Game} from "../game";
+import {Hf04Step} from "../steps/heroic-feats/hf04-step";
 
 export class Hf04 extends HeroicFeat {
     readonly name: string = "Minotaur";
@@ -20,8 +21,6 @@ export class Hf04 extends HeroicFeat {
     };
 
     initEffect = (game: Game,  callbackFunction: () => void): void => {
-        // TODO
-        console.log("Init [Minotaur] effect");
-        callbackFunction();
+        this.step = new Hf04Step(game, callbackFunction);
     };
 }

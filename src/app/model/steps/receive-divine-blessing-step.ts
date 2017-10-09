@@ -30,7 +30,7 @@ export class ReceiveDivineBlessingStep extends Step {
             this.applyLightDieFaceEffectsStep = new DoneStep();
             this.applyLightDieFaceEffectsStepEnded();
         } else {
-            this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(this.hero.inventory.lightDie.lastRolledFace, this.hero, this.applyLightDieFaceEffectsStepEnded);
+            this.applyLightDieFaceEffectsStep = new ApplyDieFaceEffectsStep(this.hero.inventory.lightDie.lastRolledFace, 1, this.hero, this.applyLightDieFaceEffectsStepEnded);
         }
         if (this.hero.inventory.darkDie.lastRolledFace.type == DieFaceType.GAIN_ALL_RESOURCES) {
             this.hero.inventory.addGoldNuggets(this.hero.inventory.darkDie.lastRolledFace.goldNuggetsQuantity);
@@ -40,7 +40,7 @@ export class ReceiveDivineBlessingStep extends Step {
             this.applyDarkDieFaceEffectsStep = new DoneStep();
             this.applyDarkDieFaceEffectsStepEnded();
         } else {
-            this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(this.hero.inventory.darkDie.lastRolledFace, this.hero, this.applyDarkDieFaceEffectsStepEnded);
+            this.applyDarkDieFaceEffectsStep = new ApplyDieFaceEffectsStep(this.hero.inventory.darkDie.lastRolledFace, 1, this.hero, this.applyDarkDieFaceEffectsStepEnded);
         }
     };
 

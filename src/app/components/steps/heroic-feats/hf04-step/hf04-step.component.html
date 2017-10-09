@@ -1,8 +1,9 @@
-<div *ngIf="!step.rollHeroBothDiceStep.isDone; else bothDiceRolled">
-    <roll-hero-both-dice-step [step]="step.rollHeroBothDiceStep"></roll-hero-both-dice-step>
+<div *ngIf="!step.rollInactiveHeroesDiceStep.isDone; else allDiceRolled">
+    <p>All inactive heroes must roll their dice.</p>
+    <roll-heroes-dice-step [step]="step.rollInactiveHeroesDiceStep"></roll-heroes-dice-step>
 </div>
-<ng-template #bothDiceRolled>
-    <p>{{step.hero.name}}, please select the resources you want to gain.</p>
+<ng-template #allDiceRolled>
+    <p>{{step.getCurrentInactiveHero().name}}, please select the resources you want to lose.</p>
     <div class="row">
         <div class="col-md-6" *ngIf="!step.applyLightDieFaceEffectsStep.isDone">
             <hr/>

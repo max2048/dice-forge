@@ -1,15 +1,15 @@
 <div *ngIf="!step.rollAllHeroesDiceStep.isDone; else allDiceRolled">
     <p>All heroes must roll their dice.</p>
-    <roll-all-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-all-heroes-dice-step>
+    <roll-heroes-dice-step [step]="step.rollAllHeroesDiceStep"></roll-heroes-dice-step>
 </div>
 <ng-template #allDiceRolled>
     <p>{{step.getCurrentHero().name}}, please select the resources you want to gain.</p>
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="!step.applyLightDieFaceEffectsStep.isDone">
             <hr/>
             <apply-die-face-effects-step [step]="step.applyLightDieFaceEffectsStep"></apply-die-face-effects-step>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" *ngIf="!step.applyDarkDieFaceEffectsStep.isDone">
             <hr/>
             <apply-die-face-effects-step [step]="step.applyDarkDieFaceEffectsStep"></apply-die-face-effects-step>
         </div>

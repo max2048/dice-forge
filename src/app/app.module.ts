@@ -13,7 +13,6 @@ import {MakeOfferingToGodsStepComponent} from "./components/steps/make-offering-
 import {PerformHeroicFeatStepComponent} from "./components/steps/perform-heroic-feat-step/perform-heroic-feat-step.component";
 import {PortalDetailComponent} from "./components/portal-detail/portal-detail.component";
 import {ReceiveDivineBlessingsStepComponent} from "./components/steps/receive-divine-blessings-step/receive-divine-blessings-step.component";
-import {RollAllHeroesDiceStepComponent} from "./components/steps/roll-all-heroes-dice-step/roll-all-heroes-dice-step.component";
 import {RollHeroBothDiceStepComponent} from "./components/steps/roll-hero-both-dice-step/roll-hero-both-dice-step.component";
 import {RollSingleDieStepComponent} from "./components/steps/roll-single-die-step/roll-single-die-step.component";
 import {RoundDetailComponent} from './components/round-detail/round-detail.component';
@@ -25,6 +24,8 @@ import {HeroicFeatDetailComponent} from "./components/heroic-feat-detail/heroic-
 import {SlotDetailComponent} from "./components/slot-detail/slot-detail.component";
 import {ReceiveDivineBlessingStepComponent} from "./components/steps/receive-divine-blessing-step/receive-divine-blessing-step.component";
 import {Hf03StepComponent} from "./components/steps/heroic-feats/hf03-step/hf03-step.component";
+import {Hf04StepComponent} from "./components/steps/heroic-feats/hf04-step/hf04-step.component";
+import {RollHeroesDiceStepComponent} from "./components/steps/roll-heroes-dice-step/roll-heroes-dice-step.component";
 
 @NgModule({
     declarations: [
@@ -36,14 +37,14 @@ import {Hf03StepComponent} from "./components/steps/heroic-feats/hf03-step/hf03-
         HeroicFeatDetailComponent,
         HeroListComponent,
         Hf03StepComponent,
+        Hf04StepComponent,
         IslandsDetailComponent,
         MakeOfferingToGodsStepComponent,
         PerformHeroicFeatStepComponent,
         PortalDetailComponent,
         ReceiveDivineBlessingStepComponent,
         ReceiveDivineBlessingsStepComponent,
-        RollAllHeroesDiceStepComponent,
-        RollAllHeroesDiceStepComponent,
+        RollHeroesDiceStepComponent,
         RollHeroBothDiceStepComponent,
         RollSingleDieStepComponent,
         RoundDetailComponent,

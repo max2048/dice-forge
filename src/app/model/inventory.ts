@@ -2,6 +2,7 @@ import {Die} from "./die";
 import {DieFace} from "./die-face";
 import {HeroicFeat} from "./heroic-feat";
 import {HeroicFeatEffectType} from "./heroic-feat-effect-type";
+import {DieFaceType} from "./die-face-type";
 
 export class Inventory {
 
@@ -47,7 +48,7 @@ export class Inventory {
         // this.lightDie.addFace(new DieFace(12, 2, 2, 2, 0, "die-faces/df16.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
         // this.lightDie.addFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
         // this.lightDie.addFace(new DieFace(12, 1, 1, 1, 1, "die-faces/df15.png"));
-        //
+
         // this.darkDie.addFace(new DieFace(0, 0, 0, 0, 2, "die-faces/df02.png"));
         // this.darkDie.addFace(new DieFace(0, 0, 0, 1, 0, "die-faces/df04.png"));
         // this.darkDie.addFace(new DieFace(5, 3, 0, 0, 2, "die-faces/df11.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
@@ -56,11 +57,11 @@ export class Inventory {
         // this.darkDie.addFace(new DieFace(4, 1, 1, 1, 0, "die-faces/df07.png", DieFaceType.GAIN_ONE_KIND_OF_RESOURCE));
     }
 
-    public getActualGoldNuggetsLimit = () : number => {
+    public getActualGoldNuggetsLimit = (): number => {
         return Inventory.GOLD_NUGGETS_LIMIT + Inventory.BLACKSMITH_CHEST_GOLD_NUGGETS_BONUS * this.blacksmithChests;
     };
 
-    public addGoldNuggets = (quantity: number) : void => {
+    public addGoldNuggets = (quantity: number): void => {
         if (quantity == 0) {
             return;
         }
@@ -71,11 +72,11 @@ export class Inventory {
         }
     };
 
-    public getActualSunShardsLimit = () : number => {
+    public getActualSunShardsLimit = (): number => {
         return Inventory.SUN_SHARDS_LIMIT + Inventory.BLACKSMITH_CHEST_SUN_SHARDS_BONUS * this.blacksmithChests;
     };
 
-    public addSunShards = (quantity: number) : void => {
+    public addSunShards = (quantity: number): void => {
         if (quantity == 0) {
             return;
         }
@@ -86,11 +87,11 @@ export class Inventory {
         }
     };
 
-    public getActualMoonShardsLimit = () : number => {
+    public getActualMoonShardsLimit = (): number => {
         return Inventory.MOON_SHARDS_LIMIT + Inventory.BLACKSMITH_CHEST_MOON_SHARDS_BONUS * this.blacksmithChests;
     };
 
-    public addMoonShards = (quantity: number) : void => {
+    public addMoonShards = (quantity: number): void => {
         if (quantity == 0) {
             return;
         }
@@ -101,7 +102,7 @@ export class Inventory {
         }
     };
 
-    public addGloryPoints = (quantity: number) : void => {
+    public addGloryPoints = (quantity: number): void => {
         if (quantity == 0) {
             return;
         }
@@ -110,6 +111,18 @@ export class Inventory {
         } else {
             this.gloryPoints = Math.max(this.gloryPoints + quantity, 0);
         }
+    };
+
+    public getHeroicFeatGloryPoints = (): number => {
+        let hfGloryPoints = 0;
+        for (let heroicFeat of this.heroicFeats) {
+            hfGloryPoints += heroicFeat.gloryPoints;
+        }
+        return hfGloryPoints;
+    };
+
+    public getTotalGloryPoints = (): number => {
+        return this.gloryPoints + this.getHeroicFeatGloryPoints();
     };
 
     public addBlacksmithChest = () : void => {
